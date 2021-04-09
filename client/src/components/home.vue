@@ -32,7 +32,7 @@ export default {
   }
 
  .search-box {
-    padding-top: 37%;
+    padding-top: 40%;
     padding-left: 15%;
   }
 
