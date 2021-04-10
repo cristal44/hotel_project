@@ -13,8 +13,8 @@
 
 
       <b-navbar-nav class="ml-auto menu">
-        <b-nav-item href="#" class="mr-4" v-if="isShown" :to="{ name: 'room' }">ROOM MANAGEMENT</b-nav-item>
-        <b-nav-item href="#" class="mr-4" v-if="isShown" :to="{ name: 'customer' }">CUSTOMER MANAGEMENT</b-nav-item>
+        <b-nav-item href="#" class="mr-4" v-if="isShown" :to="{ name: 'room' }">CHECK ROOMS</b-nav-item>
+        <b-nav-item href="#" class="mr-4" v-if="isShown" :to="{ name: 'customer' }">GEST INFO</b-nav-item>
         <b-nav-item class="signin" href="#" @click="login">
           {{status}}
         </b-nav-item>

@@ -4,7 +4,7 @@
             <b-row>
                 <b-col cols="7">
                     <div>
-                        <h4 class="pb-3">Guest Contact Info</h4>
+                        <h3 class="pb-3">Contact Info</h3>
                         <b-form @submit="onSubmit" v-if="show">
                             <b-form-group
                                 id="input-group-1"
@@ -42,7 +42,7 @@
 
      
 
-                            <b-button type="submit" block variant="primary" class="book" :to="{path:'/confirmation'}">Complete Booking</b-button>
+                            <b-button type="submit" block variant="primary" class="book" :to="{path:'/confirmation'}">RESERVATION</b-button>
                 
                             </b-form>
                     </div>
@@ -92,6 +92,10 @@ export default{
 
 
 <style scoped>
+
+h3{
+    color: #b38600;
+}
 .book{
     background-color: #b38600;
     border: #b38600;

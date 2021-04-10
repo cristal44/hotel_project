@@ -35,8 +35,8 @@
                     </b-col>
 
                      <b-col cols="6" class="text-right">
-                         <p>$250.00</p>
-                         <p>$25.00</p>
+                         <p>$300.00</p>
+                         <p>$30.00</p>
                     </b-col>
                 </b-row>
              </div>
@@ -50,7 +50,7 @@
                     </b-col>
 
                      <b-col cols="6" class="text-right">
-                         <h5>$275.00</h5>
+                         <h5>$330.00</h5>
                     </b-col>
                 </b-row>
              </div>

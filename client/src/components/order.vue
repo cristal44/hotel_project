@@ -1,12 +1,12 @@
 <template>
     <div>
         <b-container class="pt-4">
-            <h4 class="text-center pb-4">Order Information</h4>
+            <h4 class="text-center pb-4">Reservation Information</h4>
 
             <b-container class="bv-example-row text-center">
 
                 <b-row align-h="center">
-                    <b-col cols="4" class="text-right title">Order number:</b-col>
+                    <b-col cols="4" class="text-right title">Reservation number:</b-col>
                     <b-col cols="4" class="text-left">2012040812</b-col>
                 </b-row>
 
@@ -34,13 +34,13 @@
                 </b-row>
 
                 <b-row align-h="center">
-                    <b-col cols="4" class="text-right title">Rooms:</b-col>
+                    <b-col cols="4" class="text-right title">Room:</b-col>
                     <b-col cols="4" class="text-left">1</b-col>
                 </b-row>
 
                 <b-row align-h="center">
                     <b-col cols="4" class="text-right title">Total amount:</b-col>
-                    <b-col cols="4" class="text-left">$275.00</b-col>
+                    <b-col cols="4" class="text-left">$330.00</b-col>
                 </b-row>
 
 

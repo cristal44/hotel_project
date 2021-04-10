@@ -2,38 +2,54 @@
     <div>
         <b-list-group horizontal>
 
-            <b-list-group-item>
+            <!-- <b-list-group-item>
                 <label>Room</label>
-                  <b-form-spinbutton id="sb-inline" v-model="room_value"></b-form-spinbutton>
-            </b-list-group-item>
+                  <b-form-spinbutton id="sb-inline" v-model="room"></b-form-spinbutton>
+            </b-list-group-item> -->
 
             <b-list-group-item>
                 <label>Adult</label>
-                <b-form-spinbutton id="sb-inline" v-model="adult_value"></b-form-spinbutton>
+                <b-form-spinbutton id="sb-inline" v-model="adult"></b-form-spinbutton>
             </b-list-group-item>
 
             <b-list-group-item>
                 <label>Children</label>
-                <b-form-spinbutton id="sb-inline" v-model="children_value"  min="0"></b-form-spinbutton>
+                <b-form-spinbutton id="sb-inline" v-model="children"  min="0"></b-form-spinbutton>
             </b-list-group-item>
 
             <b-list-group-item>
                 <label for="example-datepicker">Arrival Date</label>
-                <b-form-datepicker id="example-datepicker" v-model="arrivaldate" class="mb-2"></b-form-datepicker>
-                <!-- <p>Value: '{{ value }}'</p> -->
+                <b-form-datepicker 
+                  id="checkin-datepicker" 
+                  placeholder="Choose a date"
+                  :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                 :min="minCheckin"
+                  locale="en"
+                  v-model="checkin" 
+                  @context="onContext"
+                  class="mb-2"
+                  required>
+                </b-form-datepicker>
             </b-list-group-item>
 
              <b-list-group-item>
                 <label for="example-datepicker">Departure Date</label>
-                <b-form-datepicker id="example-datepicker" v-model="departuredate" class="mb-2"></b-form-datepicker>
-                <!-- <p>Value: '{{ value }}'</p> -->
+                <b-form-datepicker 
+                  id="checkout-datepicker" 
+                  placeholder="Choose a date"
+                  :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                  locale="en"
+                  :min="minCheckout"
+                  v-model="checkout" 
+                  class="mb-2"
+                  required>
+                </b-form-datepicker>
              </b-list-group-item>
 
             <b-list-group-item>
               <label for="example-datepicker"></label>
-              <b-button class="mt-2 submit" type="submit" block variant="primary" :to="{path:'/reservation'}">CHECK AVAILABILITY</b-button>
-       
-             </b-list-group-item>
+              <b-button class="mt-2 submit" type="submit" block variant="primary" @click="onSearch">CHECK AVAILABILITY</b-button>
+            </b-list-group-item>
 
         </b-list-group>
 </div>
@@ -41,24 +57,53 @@
 
 
 <script>
+ import Reservation from "../reservation";
+
   export default {
+    props: ['reservation'],
+
     data() {
+      const now = new Date()
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+      const minDate_checkin = new Date(today)
+
+      const minDate_checkout = new Date(today)
+      minDate_checkout.setDate(minDate_checkout.getDate()+1)
+  
       return {
-        // selected_room: null,
-        // room_options: [1, 2, 3, 4],
-        room_value: 1,
-        adult_value: 1,
-        children_value: 0,
+        search_title: "",
+        adult: 1,
+        children: 0,
+        checkin: null,
+        checkout: null,
+        minCheckin: minDate_checkin,
+        minCheckout: minDate_checkout,
+      }
+    },
 
-        selectedAdult: null,
-        adult_options: ["Adult", 1, 2, 3, 4],
+  created: function () {
+    if (this.reservation != undefined) {
+       this.adult = this.reservation.adult,
+       this.children = this.reservation.children,
+       this.checkin = this.reservation.checkin,
+       this.checkout = this.reservation.checkout
+    }
+  },
+    methods:{
+        onSearch(){
+          const reservation = new Reservation(this.adult, this.children, this.checkin, this.checkout)
 
-        selected_children: null,
-        children_options: [0, 1, 2, 3, 4],
+          this.$router.push({
+            name: 'reservation',
+            params: { data: reservation}
+          });
+    },
 
-        arrivaldate: '',
-        departuredate: ''
-
+      onContext() {
+        const checkinDate = new Date(this.checkin)
+        const date = new Date(checkinDate.getFullYear(), checkinDate.getMonth(), checkinDate.getDate())
+        this.minCheckout = new Date(date)
+        this.minCheckout.setDate(this.minCheckout.getDate()+2)
       }
     }
   }
