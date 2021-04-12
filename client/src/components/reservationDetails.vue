@@ -19,49 +19,60 @@
                 </b-row>
              </div>
 
-             <div class="pt-4">
+             <template v-if="reservation">
 
-                <span class="title">Stay dates:</span> <br>
-                <span>Tue, 13 Apr 2021 - Thu, 15 Apr 2021</span> <br>
-                <span>1 Adult, 2 Children</span>
-             </div>
+                <div class="pt-4">
 
-
-             <div class="pt-4">
-                <b-row>
-                    <b-col cols="6">
-                        <p>Deluxe Room x 1 night</p>  
-                        <p>Taxes and Fees</p>                             
-                    </b-col>
-
-                     <b-col cols="6" class="text-right">
-                         <p>$300.00</p>
-                         <p>$30.00</p>
-                    </b-col>
-                </b-row>
-             </div>
+                    <span class="title">Stay dates:</span> <br>
+                    <span>{{ reservation.checkin | formatDate}} - {{ reservation.checkout | formatDate}}</span> <br>
+                    <span>{{reservation.adult}} Adult, {{reservation.children}} Children</span>
+                </div>
 
 
-             <hr>
-             <div>
-                <b-row>
-                    <b-col cols="6">
-                        <h5>Total:</h5>                            
-                    </b-col>
+                <div class="pt-4">
+                    <b-row>
+                        <b-col cols="8">
+                            <p>{{reservation.room.type}}  ({{reservation.days}} night)</p>  
+                            <p>Taxes and Fees</p>                             
+                        </b-col>
 
-                     <b-col cols="6" class="text-right">
-                         <h5>$330.00</h5>
-                    </b-col>
-                </b-row>
-             </div>
+                        <b-col cols="4" class="text-right">
+                            <p>$ {{reservation.bill.getRoomAmount().toFixed(2)}}</p>
+                            <p>$ {{reservation.bill.getTax().toFixed(2)}}</p>
+                        </b-col>
+                    </b-row>
+                </div>
+
+
+                <hr>
+                <div>
+                    <b-row>
+                        <b-col cols="6">
+                            <h5>Total:</h5>                            
+                        </b-col>
+
+                        <b-col cols="6" class="text-right">
+                            <h5>$ {{reservation.bill.getTotal().toFixed(2)}}</h5>
+                        </b-col>
+                    </b-row>
+                </div>
+             </template>
     </div>
 </template>
 
+
+
+<script>
+
+export default{
+  props: ['reservation']
+}
+
+</script>
+
+
 <style scoped>
 
-.details {
-    /* font-size: 14px; */
-}
 .title, p{
     color: #b38600;
 }

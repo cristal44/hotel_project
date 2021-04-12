@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2 class="text-center mt-4 pt-3 pb-3">Thank You for Choosing Our Hotel</h2>
-        <order/>
+        <order :reservation="reservation"/>
 
         <b-container class="buttons pt-4">
             <b-row>
@@ -19,6 +19,13 @@ import order from '@/components/order';
 export default{
   components: {
       order
+  },
+
+
+  created() {
+    this.reservation = this.$route.params.data;
+    console.log(111112222)
+        console.log(this.reservation)
   }
 }
 </script>

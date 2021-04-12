@@ -4,13 +4,34 @@
             <b-row>
                 <b-col cols="7">
                     <div>
+                
                         <h3 class="pb-3">Contact Info</h3>
-                        <b-form @submit="onSubmit" v-if="show">
+                        <b-form @submit="onSubmit">
+
+                            <b-form-group id="input-group-2" label="First Name:" label-for="input-2">
+                                <b-form-input
+                                id="input-2"
+                                v-model="form.firstname"
+                                placeholder="Enter first name"
+                                required
+                                ></b-form-input>
+                            </b-form-group>
+
+
+                            <b-form-group id="input-group-2" label="Last Name:" label-for="input-2">
+                                <b-form-input
+                                id="input-2"
+                                v-model="form.lastname"
+                                placeholder="Enter last name"
+                                required
+                                ></b-form-input>
+                            </b-form-group>
+
                             <b-form-group
                                 id="input-group-1"
                                 label="Email address:"
                                 label-for="input-1"
-                                description="We'll never share your email with anyone else."
+                 
                             >
                                 <b-form-input
                                 id="input-1"
@@ -21,29 +42,23 @@
                                 ></b-form-input>
                             </b-form-group>
 
-                            <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-                                <b-form-input
-                                id="input-2"
-                                v-model="form.name"
-                                placeholder="Enter name"
-                                required
-                                ></b-form-input>
-                            </b-form-group>
 
                             <b-form-group id="input-group-2" label="Phone:" label-for="input-2">
                                 <b-form-input
                                 id="input-2"
-                                v-model="form.name"
-                                placeholder="Enter name"
+                                v-model="form.phone"
+                                placeholder="Enter phone number"
                                 required
                                 ></b-form-input>
                             </b-form-group>
 
 
      
+                            <div class="pt-3">
+                                <b-button type="submit" size="lg" block variant="primary" class="book">RESERVATION</b-button>
+                            </div>
 
-                            <b-button type="submit" block variant="primary" class="book" :to="{path:'/confirmation'}">RESERVATION</b-button>
-                
+                          
                             </b-form>
                     </div>
                     
@@ -51,8 +66,8 @@
 
          
 
-                <b-col cols="5">
-                    <reservationDetails/>
+                <b-col cols="5" class="pt-4 mt-2">
+                    <reservationDetails :reservation="reservation"/>
 
                 </b-col>
             </b-row>
@@ -66,8 +81,10 @@
 <script>
 
 import reservationDetails from '@/components/reservationDetails';
+import Guest from '../guest'
 
 export default{
+
   components: {
     reservationDetails
   },
@@ -75,15 +92,38 @@ export default{
   data() {
       return {
         form: {
+          firstname: '',
+          lastname: '',
           email: '',
-          name: '',
+          phone:''
         },
-        show: true
       }
     },
-    methods: {
-        onSubmit(){}
 
+    created() {
+        this.reservation = this.$route.params.data;
+        if (this.reservation.guest != null) {
+            this.form.firstname = this.reservation.guest.firstName;
+            this.form.lastname = this.reservation.guest.lastname;
+            this.form.email = this.reservation.guest.email;
+            this.form.phone = this.reservation.guest.phone;
+        }
+    },
+
+    methods: {
+        onSubmit(event){
+            event.preventDefault()
+            // alert(JSON.stringify(this.form))
+
+            const guest = new Guest(this.form.firstname, this.form.lastname, this.form.email, this.form.phone)
+
+            this.reservation.guest = guest;
+
+            this.$router.push({
+                name: 'confirmation',
+                params: { data: this.reservation}
+            });     
+        }
     }
 }
 

@@ -1,11 +1,6 @@
 <template>
     <div>
-        <b-list-group horizontal>
-
-            <!-- <b-list-group-item>
-                <label>Room</label>
-                  <b-form-spinbutton id="sb-inline" v-model="room"></b-form-spinbutton>
-            </b-list-group-item> -->
+        <b-list-group class="list" horizontal>
 
             <b-list-group-item>
                 <label>Adult</label>
@@ -18,7 +13,7 @@
             </b-list-group-item>
 
             <b-list-group-item>
-                <label for="example-datepicker">Arrival Date</label>
+                <label for="example-datepicker">Check In</label>
                 <b-form-datepicker 
                   id="checkin-datepicker" 
                   placeholder="Choose a date"
@@ -33,7 +28,7 @@
             </b-list-group-item>
 
              <b-list-group-item>
-                <label for="example-datepicker">Departure Date</label>
+                <label for="example-datepicker">Check Out</label>
                 <b-form-datepicker 
                   id="checkout-datepicker" 
                   placeholder="Choose a date"
@@ -117,6 +112,10 @@ label {
 .submit {
     background-color: #b38600;
     border: #b38600;
+}
+
+.list {
+    text-align:center
 }
 
 </style>

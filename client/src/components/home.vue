@@ -23,7 +23,6 @@ export default {
 
 <style scoped>
   .body {
-      /* height: calc(100vh - 100px); */
       height: calc(100vh - 60px);
       width:  100vw; 
       background-repeat: no-repeat;
@@ -32,8 +31,11 @@ export default {
   }
 
  .search-box {
-    padding-top: 40%;
-    padding-left: 15%;
+   /* background-color: aqua; */
+    padding-top: calc(100vh - 180px);
+    /* padding-left: 15%; */
+    display: flex;
+    justify-content: center;
   }
 
 </style>

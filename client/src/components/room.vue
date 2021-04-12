@@ -17,22 +17,11 @@
   export default {
     data() {
       return {
-        // fields: ['room_no', 'room_type', 'room_status', 'guest'],
-        // items: [
-        //   { room_no: 101, room_type: 'Deluxe', room_status: 'Occupied', guest: '1'},
-        //   { room_no: 201, room_type: 'Deluxe', room_status: 'Vacant', guest: 'None'},
-        //   { room_no: 301, room_type: 'Deluxe', room_status: 'Occupied', guest: '2'},
-        //   { room_no: 401, room_type: 'Deluxe', room_status: 'Vacant', guest: 'None'},
-        //   { room_no: 501, room_type: 'Deluxe', room_status: 'Occupied', guest: '3'},
-        //   { room_no: 101, room_type: 'Deluxe', room_status: 'Occupied', guest: '1'},
-        //   { room_no: 201, room_type: 'Deluxe', room_status: 'Vacant', guest: 'None'},
-        //   { room_no: 301, room_type: 'Deluxe', room_status: 'Occupied', guest: '2'},
-        //   { room_no: 401, room_type: 'Deluxe', room_status: 'Vacant', guest: 'None'},
-        //   { room_no: 501, room_type: 'Deluxe', room_status: 'Occupied', guest: '3'}
-        // ]
 
-                fields: ['room_no', 'room_type', 'room_status', 'check_in', 'check_out'],
-        items: [
+
+        fields: ['room_no', 'room_type', 'room_status', 'check_in', 'check_out'],
+       
+       items: [
           { room_no: 101, room_type: 'Deluxe', room_status: 'Occupied', check_in: '2021-4-10', check_out: '2021-4-12'},
           { room_no: 201, room_type: 'Deluxe', room_status: 'Vacant', check_in: '', check_out: ''},
           { room_no: 301, room_type: 'Deluxe', room_status: 'Occupied', check_in: '2021-4-10', check_out: '2021-4-12'},
