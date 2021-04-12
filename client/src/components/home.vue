@@ -1,9 +1,14 @@
 <template>
   <div class="body" :style="{'background-image':'url(' + require('../assets/background.jpeg') + ')'}">
 
-    <div class="search-box text-center">
+    <!-- <div class="search-box text-center">
       <search/>
-    </div>
+    </div> -->
+
+
+    <b-container class="search-box text-center">
+        <search/>
+    </b-container>
    
 
   </div>
@@ -34,8 +39,8 @@ export default {
    /* background-color: aqua; */
     padding-top: calc(100vh - 180px);
     /* padding-left: 15%; */
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
   }
 
 </style>

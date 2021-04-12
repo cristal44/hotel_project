@@ -24,8 +24,6 @@ export default{
 
   created() {
     this.reservation = this.$route.params.data;
-    console.log(111112222)
-        console.log(this.reservation)
   }
 }
 </script>

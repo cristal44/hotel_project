@@ -1,18 +1,17 @@
 <template>
     <div>
         <b-list-group class="list" horizontal>
-
-            <b-list-group-item>
+            <b-list-group-item class="item">
                 <label>Adult</label>
                 <b-form-spinbutton id="sb-inline" v-model="adult"></b-form-spinbutton>
             </b-list-group-item>
 
-            <b-list-group-item>
+            <b-list-group-item class="item">
                 <label>Children</label>
                 <b-form-spinbutton id="sb-inline" v-model="children"  min="0"></b-form-spinbutton>
             </b-list-group-item>
 
-            <b-list-group-item>
+            <b-list-group-item class="item">
                 <label for="example-datepicker">Check In</label>
                 <b-form-datepicker 
                   id="checkin-datepicker" 
@@ -27,7 +26,7 @@
                 </b-form-datepicker>
             </b-list-group-item>
 
-             <b-list-group-item>
+             <b-list-group-item class="item">
                 <label for="example-datepicker">Check Out</label>
                 <b-form-datepicker 
                   id="checkout-datepicker" 
@@ -41,9 +40,9 @@
                 </b-form-datepicker>
              </b-list-group-item>
 
-            <b-list-group-item>
+            <b-list-group-item class="item">
               <label for="example-datepicker"></label>
-              <b-button class="mt-2 submit" type="submit" block variant="primary" @click="onSearch">CHECK AVAILABILITY</b-button>
+              <b-button class="mt-2 submit button pt-2 pb-2" type="submit" size="bg" block variant="primary" @click="onSearch">CHECK AVAILABILITY</b-button>
             </b-list-group-item>
 
         </b-list-group>
@@ -115,7 +114,17 @@ label {
 }
 
 .list {
-    text-align:center
+    text-align:center;
+    font-weight: bold;
+}
+
+
+.item {
+  width: 20% !important;
+}
+
+.button{
+  font-size:15px;
 }
 
 </style>
