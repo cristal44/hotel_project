@@ -1,49 +1,83 @@
 <template>
     <div>
-        <b-container class="pt-4">
-            <b-nav-form class="mb-4">
-                <b-form-input class="mr-sm-2" placeholder="Search Room No"></b-form-input>
-                <b-button  class="my-2 my-sm-0" type="submit" disabled>Search</b-button>
-            </b-nav-form>
-
-
-            <!-- <b-table Borderless hover :items="items" :fields="fields" :tbody-tr-class="rowClass" @row-clicked="myRowClickHandler"></b-table> -->
-              <b-table Borderless hover :items="items" :fields="fields" :tbody-tr-class="rowClass" @row-clicked="myRowClickHandler"></b-table>
+        <b-container>
+            ddd
         </b-container>
+        <!-- <b-container class="pt-4">
+            <h4 class="text-center pb-4">Reservation Information</h4>
+
+            <b-container class="bv-example-row text-center">
+
+                <b-row align-h="center">
+                    <b-col cols="4" class="text-right title">Reservation number:</b-col>
+                    <b-col cols="4" class="text-left">2012040812</b-col>
+                </b-row>
+
+                <b-row align-h="center">
+                    <b-col cols="4" class="text-right title">Name:</b-col>
+                    <b-col cols="4" class="text-left">{{reservation.guest.firstName}} {{reservation.guest.lastName}}</b-col>
+                </b-row>
+
+
+
+                <b-row align-h="center">
+                    <b-col cols="4" class="text-right title">Eamil:</b-col>
+                    <b-col cols="4" class="text-left">{{reservation.guest.email}}</b-col>
+                </b-row>
+
+                <b-row align-h="center">
+                    <b-col cols="4" class="text-right title">Phone:</b-col>
+                    <b-col cols="4" class="text-left">{{reservation.guest.phone}}</b-col>
+                </b-row>
+
+
+                <b-row align-h="center">
+                    <b-col cols="4" class="text-right title">Stay dates:</b-col>
+                    <b-col cols="4" class="text-left">{{ reservation.checkin | formatDate}} - {{ reservation.checkout | formatDate}}</b-col>
+                </b-row>
+
+                <b-row align-h="center">
+                    <b-col cols="4" class="text-right title">Room:</b-col>
+                    <b-col cols="4" class="text-left">1</b-col>
+                </b-row>
+
+
+                <b-row align-h="center">
+                    <b-col cols="4" class="text-right title">Days:</b-col>
+                    <b-col cols="4" class="text-left">{{reservation.days}}</b-col>
+                </b-row>
+
+                <b-row align-h="center">
+                    <b-col cols="4" class="text-right title">Total amount:</b-col>
+                    <b-col cols="4" class="text-left">{{reservation.bill.getTotal().toFixed(2)}}</b-col>
+                </b-row>
+            </b-container>
+        </b-container> -->
     </div>
 </template>
 
+
+
 <script>
   export default {
-    data() {
-      return {
 
 
-        fields: ['room_no', 'room_type', 'room_status', 'check_in', 'check_out'],
-       
-       items: [
-          { room_no: 101, room_type: 'Deluxe', room_status: 'Occupied', check_in: '2021-4-10', check_out: '2021-4-12'},
-          { room_no: 201, room_type: 'Deluxe', room_status: 'Vacant', check_in: '', check_out: ''},
-          { room_no: 301, room_type: 'Deluxe', room_status: 'Occupied', check_in: '2021-4-10', check_out: '2021-4-12'},
-          { room_no: 401, room_type: 'Deluxe', room_status: 'Vacant', check_in: '', check_out: ''},
-          { room_no: 501, room_type: 'Deluxe', room_status: 'Occupied', check_in: '2021-4-10', check_out: '2021-4-12'},
-          { room_no: 601, room_type: 'Deluxe', room_status: 'Occupied', check_in: '2021-4-10', check_out: '2021-4-12'},
-          { room_no: 701, room_type: 'Deluxe', room_status: 'Vacant', check_in: '', check_out: ''},
-          { room_no: 801, room_type: 'Deluxe', room_status: 'Occupied', check_in: '2021-4-10', check_out: '2021-4-12'},
-          { room_no: 901, room_type: 'Deluxe', room_status: 'Vacant', check_in: '', check_out: ''},
-          { room_no: 1001, room_type: 'Deluxe', room_status: 'Occupied', check_in: '2021-4-10', check_out: '2021-4-12'}
-        ]
-      }
-    },
-    methods: {
-      rowClass(item, type) {
-        if (!item || type !== 'row') return
-        if (item.room_status === 'Occupied') return 'table-success'
-      },
-              myRowClickHandler(item) {
-            console.log(item.order_no)
-            this.$router.push("/modifyreservation");
-        }
+    created() {
+        this.room = this.$route.params.data;
+        console.log("room")
+        console.log(this.room.room_number)
     }
   }
 </script>
+
+
+
+
+<style scoped>
+.title{
+    color: #b38600;
+}
+    
+</style>
+
+

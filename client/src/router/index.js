@@ -7,8 +7,9 @@ import order from "@/components/order"
 import findreservation from "@/components/findreservation"
 import modifyreservation from "@/components/modifyreservation"
 import confirmation from "@/components/confirmation"
-import room from "@/components/room"
+import roommanagement from "@/components/roommanagement"
 import customer from "@/components/customer"
+import room from "@/components/room"
 
 
 Vue.use(VueRouter)
@@ -50,14 +51,19 @@ const routes = [
     component: confirmation
   },
   {
-    path: '/room',
-    name: 'room',
-    component: room
+    path: '/roommanagement',
+    name: 'roommanagement',
+    component: roommanagement
   },
   {
     path: '/customer',
     name: 'customer',
     component: customer
+  },
+  {
+    path: '/room',
+    name: 'room',
+    component: room
   }
 ]
 

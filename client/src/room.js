@@ -1,9 +1,14 @@
 export default class Room {
-    type;
-    price;
+    room_number = null
+    room_type
+    room_price
+    room_status
+    
 
-    constructor(type, price) {
-        this.type = type;
-        this.price = price;
+    constructor(room_number, room_type, room_price, room_status) {
+        this.room_number = room_number
+        this.room_type = room_type
+        this.room_price = room_price
+        this.room_status = room_status
     }
 }

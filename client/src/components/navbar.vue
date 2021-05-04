@@ -13,8 +13,8 @@
 
 
       <b-navbar-nav class="ml-auto menu">
-        <b-nav-item href="#" class="mr-4" v-if="isShown" :to="{ name: 'room' }">CHECK ROOMS</b-nav-item>
-        <b-nav-item href="#" class="mr-4" v-if="isShown" :to="{ name: 'customer' }">GEST INFO</b-nav-item>
+        <b-nav-item href="#" class="mr-4" v-if="isShown" :to="{ name: 'roommanagement' }">ROOM MANAGEMENT</b-nav-item>
+        <b-nav-item href="#" class="mr-4" v-if="isShown" :to="{ name: 'customer' }">GUEST MANAGEMENT</b-nav-item>
         <b-nav-item class="signin" href="#" @click="login">
           {{status}}
         </b-nav-item>
@@ -22,14 +22,14 @@
         <b-modal
           id="modal-login"
           ref="modal"
-          title="Employee Login"
+          title="Admin Login"
           @show="resetModal"
           @hidden="resetModal"
           @ok="handleOk"
         >
           <form ref="form" @submit.stop.prevent="handleSubmit">
             <b-form-group
-              label="Employee ID"
+              label="ID"
               label-for="id-input"
               invalid-feedback="ID is required"
               :state="idState"
@@ -54,7 +54,10 @@
                 :state="passwordState"
                 required
               ></b-form-input>
+             
             </b-form-group>
+
+            <h6 v-if="isMatched">Your ID or Password is incorrect, please try again </h6>
 
           </form>
         </b-modal>
@@ -73,7 +76,8 @@
     
       return {
         isShown: false,
-        status: "SIGN IN",
+        status: "ADMIN LOGIN",
+        isMatched: false,
 
         id: '',
         idState: null,
@@ -88,16 +92,16 @@
     methods: {
 
       login() {
-        if (this.status === "SIGN IN") {
+        this.isMatched = false
+        if (this.status === "ADMIN LOGIN") {
           this.$bvModal.show("modal-login")
       
         } else {
-          this.status = "SIGN IN"
+          this.status = "ADMIN LOGIN"
           this.$nextTick(() => {
             this.isShown = false;
           });
           this.$router.push("/");
-
         }
       },
 
@@ -122,15 +126,23 @@
         if (!this.checkFormValidity()) {
           return
         }
+
+        if (this.id != 'admin' && this.password != '123') {
+          this.isMatched = true
+          this.idState = false
+          this.passwordState = false
+          this.resetModal()
+         
+          return
+        }
+
+        this.isShown = true
+        this.status = 'LOGOUT'
+
         this.$nextTick(() => {
           this.$bvModal.hide('modal-login')
         })
-
-        this.isShown = true
-        this.status = "SIGN OUT"
-      }
-    
-
+      },
     }
   }
 </script>
@@ -150,6 +162,10 @@
 
   .signin {
     color: #b38600!important;
+  }
+
+  h6 {
+    color: red
   }
 
 </style>

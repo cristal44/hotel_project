@@ -1,11 +1,6 @@
 <template>
   <div class="body" :style="{'background-image':'url(' + require('../assets/background.jpeg') + ')'}">
 
-    <!-- <div class="search-box text-center">
-      <search/>
-    </div> -->
-
-
     <b-container class="search-box text-center">
         <search/>
     </b-container>
@@ -18,10 +13,12 @@
 <script>
 import search from '@/components/search';
 
+
 export default {
   components: {
     search       
   },
+
 }
 </script>
 
