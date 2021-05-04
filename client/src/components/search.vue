@@ -51,7 +51,7 @@
 
 
 <script>
- import Reservation from "../reservation";
+ import Reservation from "../model/reservation";
 
   export default {
     props: ['reservation'],

@@ -15,4 +15,12 @@ export default class RoomService {
         return axios.post(this.url, room);
     }
 
+    updateRoom(room, id) {
+        return axios.put(this.url+ '/' + id, room)
+    }
+
+    deleteRoom(id) {
+        return axios.delete(this.url+ '/' + id);
+    }
+
 }

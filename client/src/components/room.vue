@@ -1,71 +1,117 @@
 <template>
     <div>
-        <b-container>
-            ddd
+        <b-container class="pt-4">
+            <b-row>
+                <b-col md="6" offset-md="3">
+                     <h4 class="text-center pb-4">ROOM</h4>
+
+                      <b-form @submit="onSubmit">
+                 
+                            <b-form-group label="Room Number">
+                                <b-form-input
+                                v-model="form.room_number"
+                                disabled
+                                ></b-form-input>
+                            </b-form-group>
+
+
+                            <b-form-group label="Room Type">
+                                <b-form-select
+                                v-model="form.room_type"
+                                :options="types"
+                                class="mb-3"
+                                value-field="item"
+                                text-field="name"
+                                disabled-field="notEnabled"
+                                required
+                                ></b-form-select>
+                            </b-form-group>
+
+
+                            <b-form-group label="Room Status" class="mt-2">
+                                <b-form-select
+                                v-model="form.room_status"
+                                :options="status"
+                                class="mb-3"
+                                value-field="item"
+                                text-field="name"
+                                disabled-field="notEnabled"
+                                required
+                                ></b-form-select>
+                            </b-form-group>
+
+                            <b-form-group label="Room Price">
+                                <b-form-input
+                                v-model="form.room_price"
+                                required
+                                ></b-form-input>
+                            </b-form-group>
+    
+                            <div class="pt-3">
+                                <b-button type="submit" size="lg" block variant="primary" class="addRoom">{{submit}}</b-button>
+                            </div>   
+                        </b-form>
+                    
+                </b-col>
+            </b-row>
         </b-container>
-        <!-- <b-container class="pt-4">
-            <h4 class="text-center pb-4">Reservation Information</h4>
 
-            <b-container class="bv-example-row text-center">
-
-                <b-row align-h="center">
-                    <b-col cols="4" class="text-right title">Reservation number:</b-col>
-                    <b-col cols="4" class="text-left">2012040812</b-col>
-                </b-row>
-
-                <b-row align-h="center">
-                    <b-col cols="4" class="text-right title">Name:</b-col>
-                    <b-col cols="4" class="text-left">{{reservation.guest.firstName}} {{reservation.guest.lastName}}</b-col>
-                </b-row>
-
-
-
-                <b-row align-h="center">
-                    <b-col cols="4" class="text-right title">Eamil:</b-col>
-                    <b-col cols="4" class="text-left">{{reservation.guest.email}}</b-col>
-                </b-row>
-
-                <b-row align-h="center">
-                    <b-col cols="4" class="text-right title">Phone:</b-col>
-                    <b-col cols="4" class="text-left">{{reservation.guest.phone}}</b-col>
-                </b-row>
-
-
-                <b-row align-h="center">
-                    <b-col cols="4" class="text-right title">Stay dates:</b-col>
-                    <b-col cols="4" class="text-left">{{ reservation.checkin | formatDate}} - {{ reservation.checkout | formatDate}}</b-col>
-                </b-row>
-
-                <b-row align-h="center">
-                    <b-col cols="4" class="text-right title">Room:</b-col>
-                    <b-col cols="4" class="text-left">1</b-col>
-                </b-row>
-
-
-                <b-row align-h="center">
-                    <b-col cols="4" class="text-right title">Days:</b-col>
-                    <b-col cols="4" class="text-left">{{reservation.days}}</b-col>
-                </b-row>
-
-                <b-row align-h="center">
-                    <b-col cols="4" class="text-right title">Total amount:</b-col>
-                    <b-col cols="4" class="text-left">{{reservation.bill.getTotal().toFixed(2)}}</b-col>
-                </b-row>
-            </b-container>
-        </b-container> -->
     </div>
 </template>
 
 
 
 <script>
+import RoomService from '../service/RoomService'
+import Room from '../model/room'
   export default {
+
+    data() {
+      return {
+        isUpdate: false,
+        submit: 'SUBMIT',
+        form: {
+          room_number: '',
+          room_type: '',
+          room_price: '',
+          room_status: '',
+        },
+
+        types: ['Deluxe Room', 'Standard Room', 'Two Bed Room', 'One Bed Room'],
+        status: ['Vacant', 'Occupied']
+      }
+    },
 
 
     created() {
+
         this.room = this.$route.params.data;
-        console.log("room")
-        console.log(this.room.room_number)
+        if (this.room != undefined) {
+            this.form.room_number = this.room.room_number
+            this.form.room_type = this.room.room_type
+            this.form.room_price = this.room.room_price
+            this.form.room_status = this.room.room_status
+            this.isUpdate = true
+            this.submit = 'UPDATE'
+        }
+    },
+
+    methods: {
+        onSubmit(event){
+            event.preventDefault()
+            // alert(JSON.stringify(this.form))
+
+            const room = new Room(parseFloat(this.form.room_price), this.form.room_type, this.form.room_status)
+
+            if (this.isUpdate) {
+                new RoomService().updateRoom(room, this.room.room_number).then(data => console.log(data))
+            } else {
+                new RoomService().saveRoom(room).then(data => console.log(data))
+            }
+
+
+            this.$router.push("roommanagement");
+        }
     }
   }
 </script>

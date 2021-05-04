@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div v-if="renderComponent">
         <b-container class="pt-4">
-            <b-row>
+          <b-row>
               <b-col>
                 <b-nav-form class="mb-4">
                     <b-form-input v-model="input_text" class="mr-sm-2" placeholder="Search Room"></b-form-input>
@@ -12,11 +12,16 @@
               </b-col>
 
               <b-col cols="12" md="auto">
-                 <b-button class="cbutton">Add a Room</b-button>
+                 <b-button class="cbutton" :to="{ name: 'room' }">Add a Room</b-button>
               </b-col>
            </b-row>
 
-           <b-table Borderless hover   :select-mode="selectMode" :items="displayRooms" :fields="fields" :tbody-tr-class="rowClass" @row-clicked="myRowClickHandler"></b-table>
+           <b-table id = "my-table" Borderless :items="displayRooms" :fields="fields" :tbody-tr-class="rowClass">
+              <template v-slot:cell(action)="{ item }"> 
+                    <b-button variant="link" class="mr-2" size="sm" v-on:click="updateRoom(item)">Update</b-button>
+                    <b-button variant="link" size="sm" v-on:click="deleteRoom(item)">Delete</b-button>
+              </template>
+           </b-table>
         </b-container>
     </div>
 </template>
@@ -27,10 +32,12 @@
   export default {
     data() {
       return {
+        renderComponent: true,
         input_text: '',
-        fields: ['room_number', 'room_type', 'room_status', 'room_price'],
+        fields: ['room_number', 'room_type', 'room_status', 'room_price', 'Action'],
         rooms: null,
-        displayRooms: null
+        displayRooms: null,
+        selectedRoom: null
       }
     },
 
@@ -46,10 +53,10 @@
       rowClass(item, type) {
         if (!item || type !== 'row') return
         if (item.room_status === 'Occupied') return 'table-success'
-        
       },
 
       filterRooms(){
+        console.log(this.selectedRoom)
         if (this.input_text != "") {
           let data = this.rooms.filter(room => room.room_number == parseInt(this.input_text)
               || room.room_status.toUpperCase() == this.input_text.toUpperCase()
@@ -63,25 +70,20 @@
       displayAllRooms() {
         this.displayRooms = this.rooms
       },
-        
-      myRowClickHandler(item) {
-          console.log(item)
-          console.log(item.room_status)
 
-if (item) return 'table-success'
-    
-       
-        // this.$router.push("/modifyreservation");
-
-
-          // this.$router.push({
-          //         name: 'room',
-          //         params: { data: item}
-          //     });     
-      }
-    },
-
-
+      updateRoom(item) {
+        this.$router.push({
+            name: 'room',
+            params: { data: item}
+        });    
+      },
+      deleteRoom(item) {
+        let id = item.room_number
+        new RoomService().deleteRoom(item.room_number)
+        let updateData = this.displayRooms.filter(room => room.room_number != id)
+        this.displayRooms = updateData
+      },
+   }
   }
 </script>
 

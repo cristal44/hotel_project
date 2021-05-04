@@ -81,7 +81,7 @@
 <script>
 
 import reservationDetails from '@/components/reservationDetails';
-import Guest from '../guest'
+import Guest from '../model/guest'
 
 export default{
 

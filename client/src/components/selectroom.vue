@@ -36,8 +36,8 @@
 
 
 <script>
-  import Room from "../room"
-  import Bill from "../bill"
+  import Room from "../model/room"
+  import Bill from "../model/bill"
 
   export default {
     props: ['reservation'],
