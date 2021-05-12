@@ -12,7 +12,7 @@
               </b-col>
 
               <b-col cols="12" md="auto">
-                 <b-button class="cbutton" :to="{ name: 'room' }">Add a Room</b-button>
+                 <b-button class="cbutton" :to="{ name: 'addroom' }">Add a Room</b-button>
               </b-col>
            </b-row>
 
@@ -73,7 +73,7 @@
 
       updateRoom(item) {
         this.$router.push({
-            name: 'room',
+            name: 'addroom',
             params: { data: item}
         });    
       },
