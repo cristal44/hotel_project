@@ -1,5 +1,4 @@
 export default class Guest {
-    id = null;
     firstName = null;
     lastName = null;
     email = null;

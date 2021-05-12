@@ -1,19 +1,14 @@
 export default class Bill {
+    date;
+    tax;
+    roomTotalPrice;
+    amount;
 
-    constructor(roomPrice, days) {
-        this.roomPrice = roomPrice;
-        this.days = days;
+    constructor(date, tax, roomTotalPrice, amount ) {
+        this.date = date;
+        this.tax = tax;
+        this.roomTotalPrice = roomTotalPrice;
+        this.amount = amount
     }
 
-    getRoomAmount() {
-        return (this.roomPrice * this.days);
-    }
-
-    getTax(){
-        return (this.getRoomAmount() * 0.1);
-    }
-
-    getTotal() {
-        return this.getRoomAmount() + this.getTax();
-    }
 }

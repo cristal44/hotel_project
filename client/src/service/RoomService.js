@@ -3,6 +3,10 @@ import axios from 'axios';
 export default class RoomService {
     url = "http://localhost:8080/api/rooms";
 
+    getAvailableRooms(){
+        return axios.get(this.url+ '/available');
+    }
+
     getAllRooms() {
         return axios.get(this.url);
     }

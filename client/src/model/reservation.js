@@ -1,14 +1,12 @@
 export default class Reservation {
-    reservation_id;
-    room;
-    guest = null;
-    bill;
-    days;
-    amount;
     adult = 1;
     children = 0;
+    days;
     checkin = null;
-    checkout = null;    
+    checkout = null;   
+    room_id;
+    guest = null;
+    bill;
 
     constructor(adult, children, checkin, checkout) {
         this.adult = adult;

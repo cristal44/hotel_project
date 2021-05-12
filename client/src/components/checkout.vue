@@ -82,6 +82,7 @@
 
 import reservationDetails from '@/components/reservationDetails';
 import Guest from '../model/guest'
+import ReservationService from '../service/ReservationService'
 
 export default{
 
@@ -118,11 +119,20 @@ export default{
             const guest = new Guest(this.form.firstname, this.form.lastname, this.form.email, this.form.phone)
 
             this.reservation.guest = guest;
+            console.log(this.reservation)
+            console.log(JSON.stringify(this.reservation))
 
-            this.$router.push({
-                name: 'confirmation',
-                params: { data: this.reservation}
-            });     
+            new ReservationService().saveReservation(this.reservation).then(
+                data => console.log(data.data)
+            )
+
+
+
+
+            // this.$router.push({
+            //     name: 'confirmation',
+            //     params: { data: this.reservation}
+            // });     
         }
     }
 }

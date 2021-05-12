@@ -32,13 +32,13 @@
                 <div class="pt-4">
                     <b-row>
                         <b-col cols="8">
-                            <p>{{reservation.room.type}}  ({{reservation.days}} night)</p>  
+                            <p> ({{reservation.days}} night)</p>  
                             <p>Taxes and Fees</p>                             
                         </b-col>
 
                         <b-col cols="4" class="text-right">
-                            <p>$ {{reservation.bill.getRoomAmount().toFixed(2)}}</p>
-                            <p>$ {{reservation.bill.getTax().toFixed(2)}}</p>
+                            <p>$ {{reservation.bill.roomTotalPrice}}</p>
+                            <p>$ {{reservation.bill.tax}}</p>
                         </b-col>
                     </b-row>
                 </div>
@@ -52,7 +52,7 @@
                         </b-col>
 
                         <b-col cols="6" class="text-right">
-                            <h5>$ {{reservation.bill.getTotal().toFixed(2)}}</h5>
+                            <h5>$ {{reservation.bill.amount}}</h5>
                         </b-col>
                     </b-row>
                 </div>

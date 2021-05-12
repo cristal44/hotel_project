@@ -10,7 +10,7 @@
                             <b-form-group label="Room Number">
                                 <b-form-input
                                 v-model="form.room_number"
-                                disabled
+                                :disabled = "isDisabled"
                                 ></b-form-input>
                             </b-form-group>
 
@@ -70,6 +70,7 @@ import Room from '../model/room'
       return {
         isUpdate: false,
         submit: 'SUBMIT',
+        isDisabled: false,
         form: {
           room_number: '',
           room_type: '',
@@ -77,7 +78,7 @@ import Room from '../model/room'
           room_status: '',
         },
 
-        types: ['Deluxe Room', 'Standard Room', 'Two Bed Room', 'One Bed Room'],
+        types: ['VIP Room', 'Standard Room', 'Suite', 'One Bed Room'],
         status: ['Vacant', 'Occupied']
       }
     },
@@ -93,6 +94,7 @@ import Room from '../model/room'
             this.form.room_status = this.room.room_status
             this.isUpdate = true
             this.submit = 'UPDATE'
+            this.isDisabled = true
         }
     },
 
