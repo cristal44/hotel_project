@@ -103,12 +103,12 @@ import Room from '../model/room'
             event.preventDefault()
             // alert(JSON.stringify(this.form))
 
-            const room = new Room(parseFloat(this.form.room_price), this.form.room_type, this.form.room_status)
+            const room = new Room(this.form.room_number, parseFloat(this.form.room_price), this.form.room_type, "this is a "  + this.form.room_type, this.form.room_status)
 
             if (this.isUpdate) {
-                new RoomService().updateRoom(room, this.room.room_number).then(data => console.log(data))
+                new RoomService().updateRoom(room, this.form.room_number);
             } else {
-                new RoomService().saveRoom(room).then(data => console.log(data))
+                new RoomService().saveRoom(room);
             }
 
 

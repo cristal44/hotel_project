@@ -1,6 +1,6 @@
 export default class Reservation {
     adult = 1;
-    children = 0;
+    child = 0;
     days;
     checkin = null;
     checkout = null;   
@@ -8,9 +8,9 @@ export default class Reservation {
     guest = null;
     bill;
 
-    constructor(adult, children, checkin, checkout) {
+    constructor(adult, child, checkin, checkout) {
         this.adult = adult;
-        this.children = children;
+        this.child = child;
         this.checkin = checkin;
         this.checkout = checkout;
     }

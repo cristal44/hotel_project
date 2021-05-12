@@ -78,7 +78,7 @@
   created: function () {
     if (this.reservation != undefined) {
        this.adult = this.reservation.adult,
-       this.children = this.reservation.children,
+       this.children = this.reservation.child,
        this.checkin = this.reservation.checkin,
        this.checkout = this.reservation.checkout
     }

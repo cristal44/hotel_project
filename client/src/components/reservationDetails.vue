@@ -25,7 +25,7 @@
 
                     <span class="title">Stay dates:</span> <br>
                     <span>{{ reservation.checkin | formatDate}} - {{ reservation.checkout | formatDate}}</span> <br>
-                    <span>{{reservation.adult}} Adult, {{reservation.children}} Children</span>
+                    <span>{{reservation.adult}} Adult, {{reservation.child}} Children</span>
                 </div>
 
 

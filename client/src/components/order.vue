@@ -7,24 +7,24 @@
 
                 <b-row align-h="center">
                     <b-col cols="4" class="text-right title">Reservation number:</b-col>
-                    <b-col cols="4" class="text-left">2012040812</b-col>
+                    <b-col cols="4" class="text-left">{{reservation.reservation_id}}</b-col>
                 </b-row>
 
                 <b-row align-h="center">
                     <b-col cols="4" class="text-right title">Name:</b-col>
-                    <b-col cols="4" class="text-left">{{reservation.guest.firstName}} {{reservation.guest.lastName}}</b-col>
+                    <b-col cols="4" class="text-left">{{reservation.guest.first_name}} {{reservation.guest.last_name}}</b-col>
                 </b-row>
 
 
 
                 <b-row align-h="center">
                     <b-col cols="4" class="text-right title">Eamil:</b-col>
-                    <b-col cols="4" class="text-left">{{reservation.guest.email}}</b-col>
+                    <b-col cols="4" class="text-left">{{reservation.guest.email_addr}}</b-col>
                 </b-row>
 
                 <b-row align-h="center">
                     <b-col cols="4" class="text-right title">Phone:</b-col>
-                    <b-col cols="4" class="text-left">{{reservation.guest.phone}}</b-col>
+                    <b-col cols="4" class="text-left">{{reservation.guest.phone_number}}</b-col>
                 </b-row>
 
 
@@ -46,7 +46,7 @@
 
                 <b-row align-h="center">
                     <b-col cols="4" class="text-right title">Total amount:</b-col>
-                    <b-col cols="4" class="text-left">{{reservation.bill.getTotal().toFixed(2)}}</b-col>
+                    <b-col cols="4" class="text-left">USD {{reservation.bill.amount}}</b-col>
                 </b-row>
             </b-container>
         </b-container>

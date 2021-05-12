@@ -13,6 +13,8 @@
 
 
       <b-navbar-nav class="ml-auto menu">
+        <b-nav-item href="#" class="mr-4" v-if="isShown" :to="{ name: 'roommanagement' }">HOTEL MANAGEMENT</b-nav-item>
+        <b-nav-item href="#" class="mr-4" v-if="isShown" :to="{ name: 'roommanagement' }">EMPLOYEE MANAGEMENT</b-nav-item>
         <b-nav-item href="#" class="mr-4" v-if="isShown" :to="{ name: 'roommanagement' }">ROOM MANAGEMENT</b-nav-item>
         <b-nav-item href="#" class="mr-4" v-if="isShown" :to="{ name: 'customer' }">GUEST MANAGEMENT</b-nav-item>
         <b-nav-item class="signin" href="#" @click="login">

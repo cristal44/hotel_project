@@ -1,13 +1,13 @@
 export default class Guest {
-    firstName = null;
-    lastName = null;
-    email = null;
-    phone = null;
+    first_name = null;
+    last_name = null;
+    email_addr = null;
+    phone_number = null;
 
-    constructor(firstName, lastName, email, phone) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
+    constructor(first_name, last_name, email_addr, phone_number) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email_addr = email_addr;
+        this.phone_number = phone_number;
     }
 }
