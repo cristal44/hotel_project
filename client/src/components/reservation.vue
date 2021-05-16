@@ -3,9 +3,9 @@
         <b-container class="pb-4">
             <b-row>
                 <b-col cols="12">
-                    <search :reservation="reservation"></search>
+                    <search :oldReservation="reservation" ></search>
                     <div class="pb-4">
-                      <selectroom :reservation="reservation"/>
+                      <selectroom :oldReservation="reservation"/>
                     </div>
                  
                 </b-col>
@@ -33,6 +33,7 @@ export default{
 
   created() {
         this.reservation = this.$route.params.data;
+        console.log(this.reservation)
   }
 }
 </script>

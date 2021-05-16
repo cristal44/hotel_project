@@ -32,17 +32,16 @@
                  <b-row>
                     <b-col align-self="start"></b-col>
                     <b-col align-self="center">
-                        <b-button class="button" block type="submit" size="lg" variant="primary" :to="{path:'/modifyreservation',query:{number:{number}, email:{email}}}">FIND RESERVATION</b-button>
+                        <b-button class="button" block type="submit" size="lg" variant="primary">FIND RESERVATION</b-button>
                     </b-col>
                     <b-col align-self="end">  </b-col>
                 </b-row>
               
             </div>
 
-
-            <!-- <div class="pt-4 mt-3">
-                <h5> Forgot your reservation number? </h5>
-                Your reservation number was included in an email sent at the time of booking. Please check your email to recover the number.
+<!-- 
+            <div class="pt-4 mt-3 text-center error">
+                {{error}}
             </div> -->
 
 
@@ -57,21 +56,39 @@
 
 
 <script>
+import ReservationService from '../service/ReservationService'
   export default {
     data() {
       return {
         form: {
           number: '',
           email: '',
-        }
+          // error: '',
+          reservation: null
+        },
       }
     },
     methods: {
       onSubmit(event) {
         event.preventDefault()
-        alert(JSON.stringify(this.form))
-      }
+        // alert(JSON.stringify(this.form))
+
+        new ReservationService().getAllReservations().then(data => {
+          const reservations = data.data
+
+          for (let i = 0; i < reservations.length; i++) {
+            if (reservations[i].reservation_id == parseInt(this.form.number)  && reservations[i].guest.email_addr == this.form.email) {   
+              this.reservation = reservations[i]
+              this.$router.push({
+                name: 'modifyreservation',
+                params: { data: this.reservation}
+               });    
+            }
+          }
+
+      })
     }
+  }
   }
 </script>
 
@@ -87,5 +104,9 @@ h4{
 .button{
     background-color: #b38600;
     border: #b38600;
+}
+
+.error{
+  color: red;
 }
 </style>

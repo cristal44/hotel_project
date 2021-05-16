@@ -16,6 +16,7 @@
 <script>
 import order from '@/components/order';
 
+
 export default{
   components: {
       order

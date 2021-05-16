@@ -7,8 +7,12 @@ export default class Reservation {
     room_id;
     guest = null;
     bill;
+    hotel;
+    hotel_id;
+    reservation_id
 
-    constructor(adult, child, checkin, checkout) {
+    constructor( hotel, adult, child, checkin, checkout) {
+        this. hotel =  hotel
         this.adult = adult;
         this.child = child;
         this.checkin = checkin;

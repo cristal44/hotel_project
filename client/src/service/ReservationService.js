@@ -7,6 +7,10 @@ export default class ReservationService {
         return axios.get(this.url);
     }
 
+    getReservationByIdAndEmail(email, id) {
+        return axios.get(this.url+ '/' + id, email);
+    }
+
     getReservationById(id) {
         return axios.get(this.url+ '/' + id);
     }

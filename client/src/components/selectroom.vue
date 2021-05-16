@@ -40,27 +40,43 @@
 //   import Payment from "../model/payment"
   import RoomService from '../service/RoomService'
   import Bill from '../model/bill'
+  import EventBus from '../event-bus'
+
 
   export default {
-    props: ['reservation'],
+    props: ['oldReservation'],
 
     data() {
       return {
           show: true,
-          rooms: null
+          rooms: null,
+          reservation: this.oldReservation
       }
     },
 
+    
+
      created() {
-         new RoomService().getAvailableRooms().then(data => {
+        EventBus.$on("data", (data)=>{
+            this.reservation = data
+            // console.log(this.reservation.hotel_id)
+            new RoomService().getAvailableRoomsByHotel(this.reservation.hotel_id).then(data => {
+                this.rooms = data.data
+                if (this.rooms.length != 0) {
+                    this.show = false;
+                }            
+             })
+        }) 
+
+// console.log(1000)
+//         console.log(this.reservation)
+
+        new RoomService().getAvailableRoomsByHotel(this.reservation.hotel_id).then(data => {
             this.rooms = data.data
              if (this.rooms.length != 0) {
                  this.show = false;
              }            
         })
- 
-            
-        // )
 
         // this.room = this.$route.params.data;
         // if (this.room != undefined) {
@@ -75,27 +91,22 @@
     },
 
     methods: {
+
         book(room){
 
-        console.log(this.reservation)
             const diffInMs   = new Date(this.reservation.checkout) - new Date(this.reservation.checkin)
             const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
 
             this.reservation.days = diffInDays;
-            // this.reservation.room = room;
-            // const price = room.room_price;
-
-            this.reservation.room_id = room.room_number
+            this.reservation.room_id = room.id
         
-            
-
             const roomPrices = this.reservation.days * room.room_price
             const tax = roomPrices * 0.1
  
             this.reservation.bill = new Bill(this.reservation.checkin, tax.toFixed(2), roomPrices.toFixed(2), (tax + roomPrices).toFixed(2));
 
 
-            console.log(this.reservation)
+            // console.log(this.reservation)
 
              this.$router.push({
                 name: 'checkout',

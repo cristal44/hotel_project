@@ -4,6 +4,7 @@
              <b-list-group-item class="item">
                <label>Location</label>
                 <b-form-select
+                  v-model="selectedHotel"
                   :options="locations"
                   required
                 ></b-form-select>
@@ -50,7 +51,7 @@
 
             <b-list-group-item class="item">
               <label for="example-datepicker"></label>
-              <b-button class="mt-2 submit button pt-2 pb-2" type="submit" size="bg" block variant="primary" @click="onSearch">SEARCH</b-button>
+              <b-button class="mt-2 submit button pt-2 pb-2" type="submit" size="bg" block variant="primary"  @click="onSearch">SEARCH</b-button>
             </b-list-group-item>
 
         </b-list-group>
@@ -60,9 +61,11 @@
 
 <script>
  import Reservation from "../model/reservation";
+ import HotelService from "../service/HotelService"
+ import EventBus from '../event-bus'
 
   export default {
-    props: ['reservation'],
+    props: ['oldReservation'],
 
     data() {
       const now = new Date()
@@ -80,26 +83,64 @@
         checkout: null,
         minCheckin: minDate_checkin,
         minCheckout: minDate_checkout,
-        locations:['Chicago', 'New York', 'Miami'],
+        locations:[],
+        selectedHotel: null,
+        reservation: this.oldReservation
+
       }
     },
 
   created: function () {
     if (this.reservation != undefined) {
+      this.selectedHotel = this.reservation.hotel
+      if (this.selectedHotel == undefined || this.selectedHotel == null) {
+        new HotelService().getHotelById(this.reservation.hotel_id).then(data => {
+          this.selectedHotel = data.data
+        })
+      }
+
        this.adult = this.reservation.adult,
        this.children = this.reservation.child,
        this.checkin = this.reservation.checkin,
        this.checkout = this.reservation.checkout
-    }
+    } 
   },
+
+    mounted() {
+      new HotelService().getAllHotels().then(data => {
+          const hotels = data.data
+
+          const locations = []
+          for(let i = 0; i < hotels.length; i++) {
+            locations[i] = {value: hotels[i], text: hotels[i].hotelAddress.city}
+          }
+
+          this.locations = locations
+          // console.log(this.locations)
+      })
+    },
+
     methods:{
         onSearch(){
-          const reservation = new Reservation(this.adult, this.children, this.checkin, this.checkout)
 
-          this.$router.push({
-            name: 'reservation',
-            params: { data: reservation}
-          });
+          const reservation = new Reservation(this.selectedHotel, this.adult, this.children, this.checkin, this.checkout)
+          reservation.hotel_id = this.selectedHotel.id
+
+          if (this.reservation.reservation_id != undefined) {
+            reservation.reservation_id = this.reservation.reservation_id
+          }
+
+          if (this.oldReservation != undefined) {
+            // console.log(111)
+            // console.log(reservation)
+            EventBus.$emit("data",reservation)
+          } else {
+            this.$router.push({
+              name: 'reservation',
+              params: { data: reservation}
+             });
+          }
+
     },
 
       onContext() {

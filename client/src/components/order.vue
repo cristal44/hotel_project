@@ -34,8 +34,13 @@
                 </b-row>
 
                 <b-row align-h="center">
-                    <b-col cols="4" class="text-right title">Room:</b-col>
-                    <b-col cols="4" class="text-left">1</b-col>
+                    <b-col cols="4" class="text-right title" v-if="hotel">Hotel Name:</b-col>
+                    <b-col cols="4" class="text-left" v-if="hotel">{{hotel.name}}</b-col>
+                </b-row>
+
+                <b-row align-h="center">
+                    <b-col cols="4" class="text-right title" v-if="room">Room:</b-col>
+                    <b-col cols="4" class="text-left" v-if="room">{{room.room_number}}</b-col>
                 </b-row>
 
 
@@ -56,9 +61,35 @@
 
 
 <script>
+import RoomService from '../service/RoomService'
+import HotelService from '../service/HotelService'
+
   export default {
-    props: ['reservation']
-  }
+    props: ['reservation'],
+    data() {
+      return {
+          room: null,
+          hotel: null
+    }
+  },
+  
+
+  mounted() {
+    //   this.hotel = this.reservation.hotel
+    //   console.log(this.reservation)
+    //      console.log(this.reservation.hotel)
+
+       new RoomService().getRoomById(this.reservation.room_id).then(data => {
+        this.room = data.data
+        // console.log(this.room)
+        })
+
+        new HotelService().getHotelById(this.reservation.hotel_id).then(data => {
+            this.hotel = data.data
+        })
+    },
+}
+
 </script>
 
 

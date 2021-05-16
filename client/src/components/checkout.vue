@@ -68,7 +68,6 @@
 
                 <b-col cols="5" class="pt-4 mt-2">
                     <reservationDetails :reservation="reservation"/>
-
                 </b-col>
             </b-row>
                 
@@ -103,11 +102,14 @@ export default{
 
     created() {
         this.reservation = this.$route.params.data;
-        if (this.reservation.guest != null) {
-            this.form.firstname = this.reservation.guest.firstName;
-            this.form.lastname = this.reservation.guest.lastname;
-            this.form.email = this.reservation.guest.email;
-            this.form.phone = this.reservation.guest.phone;
+        console.log("checkout")
+        console.log(this.reservation)
+        if (this.reservation.guest != undefined || this.reservation.guest != null ) {
+            console.log("checkout111")
+            this.form.firstname = this.reservation.guest.first_name;
+            this.form.lastname = this.reservation.guest.last_name;
+            this.form.email = this.reservation.guest.email_addr;
+            this.form.phone = this.reservation.guest.phone_number;
         }
     },
 
@@ -118,21 +120,47 @@ export default{
 
             const guest = new Guest(this.form.firstname, this.form.lastname, this.form.email, this.form.phone)
 
+
+          if (this.reservation.guest.guest_id != undefined) {
+            guest.guest_id = this.reservation.guest.guest_id
+          }
+
             this.reservation.guest = guest;
-            console.log(this.reservation)
-            console.log(JSON.stringify(this.reservation))
+            // console.log(this.reservation)
+            // console.log(JSON.stringify(this.reservation))
 
+            
+          if (this.reservation.reservation_id == undefined) {
             new ReservationService().saveReservation(this.reservation).then(
-                data => console.log(data.data)
+                data => {
+                    const rev = data.data
+                    this.$router.push({
+                        name: 'confirmation',
+                        params: { data: rev}
+                    });     
+                }
             )
+          } else {
+              new ReservationService().updateReservation(this.reservation, this.reservation.reservation_id).then(
+                data => {
+                    const rev = data.data
+                    this.$router.push({
+                        name: 'confirmation',
+                        params: { data: rev}
+                    });     
+                }
+            )
+          }
 
-
-
-
-            // this.$router.push({
-            //     name: 'confirmation',
-            //     params: { data: this.reservation}
-            // });     
+            // new ReservationService().saveReservation(this.reservation).then(
+            //     data => {
+            //         const rev = data.data
+            //         this.$router.push({
+            //             name: 'confirmation',
+            //             params: { data: rev}
+            //         });     
+            //     }
+            // )
         }
     }
 }

@@ -1,8 +1,8 @@
 <template>
     <div>
         <b-container>
-            <!-- <order/> -->
-            <div>
+             <order :reservation="reservation"/>
+            <!-- <div>
                 <b-container class="pt-4">
                     <h4 class="text-center pb-4">Reservation Information</h4>
 
@@ -53,13 +53,13 @@
                     
 
                 </b-container>
-            </div>
+            </div> -->
 
         </b-container>
 
         <b-container class="buttons pt-4">
             <b-row>
-                <b-col><b-button block variant="primary" :to="{path:'/reservation'}">UPDATE</b-button></b-col>
+                <b-col><b-button block variant="primary" @click="updateOrder">UPDATE</b-button></b-col>
                
                 <b-col><b-button block variant="primary" v-b-modal.modal-1>CANCEL</b-button></b-col>
                   <b-modal id="modal-1" title="Cancel Reservation" @ok="cancelOrder">
@@ -73,13 +73,23 @@
 </template>
 
 <script>
-// import order from '@/components/order';
+import order from '@/components/order';
 
 export default{
   components: {
-    //   order
+      order
+  },
+   created() {
+        this.reservation = this.$route.params.data;
   },
   methods:{
+      updateOrder(){
+            this.$router.push({
+              name: 'reservation',
+              params: { data: this.reservation}
+             });
+      },
+      
       cancelOrder(){
           console.log("yes");
           this.$router.push("/");
