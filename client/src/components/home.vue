@@ -34,7 +34,7 @@ export default {
 
  .search-box {
    /* background-color: aqua; */
-    padding-top: calc(100vh - 180px);
+    padding-top: calc(100vh - 190px);
     /* padding-left: 15%; */
     /* display: flex;
     justify-content: center; */

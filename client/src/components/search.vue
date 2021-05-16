@@ -1,6 +1,14 @@
 <template>
     <div>
         <b-list-group class="list" horizontal>
+             <b-list-group-item class="item">
+               <label>Location</label>
+                <b-form-select
+                  :options="locations"
+                  required
+                ></b-form-select>
+             </b-list-group-item>
+
             <b-list-group-item class="item">
                 <label>Adult</label>
                 <b-form-spinbutton id="sb-inline" v-model="adult"></b-form-spinbutton>
@@ -15,7 +23,7 @@
                 <label for="example-datepicker">Check In</label>
                 <b-form-datepicker 
                   id="checkin-datepicker" 
-                  placeholder="Choose a date"
+                  placeholder="-"
                   :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                  :min="minCheckin"
                   locale="en"
@@ -30,7 +38,7 @@
                 <label for="example-datepicker">Check Out</label>
                 <b-form-datepicker 
                   id="checkout-datepicker" 
-                  placeholder="Choose a date"
+                  placeholder="-"
                   :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                   locale="en"
                   :min="minCheckout"
@@ -42,7 +50,7 @@
 
             <b-list-group-item class="item">
               <label for="example-datepicker"></label>
-              <b-button class="mt-2 submit button pt-2 pb-2" type="submit" size="bg" block variant="primary" @click="onSearch">CHECK AVAILABILITY</b-button>
+              <b-button class="mt-2 submit button pt-2 pb-2" type="submit" size="bg" block variant="primary" @click="onSearch">SEARCH</b-button>
             </b-list-group-item>
 
         </b-list-group>
@@ -72,6 +80,7 @@
         checkout: null,
         minCheckin: minDate_checkin,
         minCheckout: minDate_checkout,
+        locations:['Chicago', 'New York', 'Miami'],
       }
     },
 
@@ -125,6 +134,10 @@ label {
 
 .button{
   font-size:15px;
+}
+
+#checkin-datepicker{
+  font-size: 16px;
 }
 
 </style>

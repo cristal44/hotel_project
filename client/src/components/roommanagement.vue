@@ -15,6 +15,7 @@
                  <b-button class="cbutton" :to="{ name: 'addroom' }">Add a Room</b-button>
               </b-col>
            </b-row>
+          
 
            <b-table id = "my-table" Borderless :items="displayRooms" :fields="fields" :tbody-tr-class="rowClass">
               <template v-slot:cell(action)="{ item }"> 
