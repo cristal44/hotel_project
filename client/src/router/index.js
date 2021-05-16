@@ -10,6 +10,7 @@ import confirmation from "@/components/confirmation"
 import roommanagement from "@/components/roommanagement"
 import customer from "@/components/customer"
 import addroom from "@/components/addroom"
+import review from "@/components/review"
 
 
 Vue.use(VueRouter)
@@ -64,6 +65,11 @@ const routes = [
     path: '/addroom',
     name: 'addroom',
     component: addroom
+  },
+  {
+    path: '/review',
+    name: 'review',
+    component: review
   }
 ]
 

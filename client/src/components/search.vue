@@ -45,6 +45,11 @@
               <b-button class="mt-2 submit button pt-2 pb-2" type="submit" size="bg" block variant="primary" @click="onSearch">CHECK AVAILABILITY</b-button>
             </b-list-group-item>
 
+            <b-list-group-item class="item">
+              <label for="example-datepicker"></label>
+              <b-button class="mt-2 submit button pt-2 pb-2" type="submit" size="bg" block variant="primary" @click="onSearch">SEE REVIEWS</b-button>
+            </b-list-group-item>
+
         </b-list-group>
 </div>
 </template>

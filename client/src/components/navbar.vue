@@ -9,6 +9,8 @@
 
       <b-navbar-nav class="menu">
         <b-nav-item href="#" class="mr-4" :to="{ name: 'findreservation' }">MODIFY A RESERVATION</b-nav-item>
+        <b-nav-item href="#" class="mr-4" :to="{ name: 'review' }">REVIEW</b-nav-item>
+
       </b-navbar-nav>
 
 
