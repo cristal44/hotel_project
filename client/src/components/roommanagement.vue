@@ -42,7 +42,7 @@
       }
     },
 
-    mounted() {
+    created() {
       new RoomService().getAllRooms().then(data => {
         this.rooms = data.data
         this.displayRooms = this.rooms

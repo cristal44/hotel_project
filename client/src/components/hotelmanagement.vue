@@ -37,7 +37,7 @@
       }
     },
 
-    mounted() {
+    created() {
         new HotelService().getAllHotels().then(data => {
              this.hoteldata = data.data
              console.log(this.hoteldata)
