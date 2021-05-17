@@ -102,10 +102,7 @@ export default{
 
     created() {
         this.reservation = this.$route.params.data;
-        console.log("checkout")
-        console.log(this.reservation)
         if (this.reservation.guest != undefined || this.reservation.guest != null ) {
-            console.log("checkout111")
             this.form.firstname = this.reservation.guest.first_name;
             this.form.lastname = this.reservation.guest.last_name;
             this.form.email = this.reservation.guest.email_addr;
@@ -126,12 +123,11 @@ export default{
              }
           }
 
-
-
+            //    console.log("text")
+            //    console.log(this.reservation)
+            //     console.log("text")
 
             this.reservation.guest = guest;
-            // console.log(this.reservation)
-            // console.log(JSON.stringify(this.reservation))
 
             
           if (this.reservation.reservation_id == undefined) {
@@ -155,16 +151,6 @@ export default{
                 }
             )
           }
-
-            // new ReservationService().saveReservation(this.reservation).then(
-            //     data => {
-            //         const rev = data.data
-            //         this.$router.push({
-            //             name: 'confirmation',
-            //             params: { data: rev}
-            //         });     
-            //     }
-            // )
         }
     }
 }

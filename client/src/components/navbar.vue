@@ -33,7 +33,7 @@
         >
           <form ref="form" @submit.stop.prevent="handleSubmit">
             <b-form-group
-              label="ID"
+              label="User Name"
               label-for="id-input"
               invalid-feedback="ID is required"
               :state="idState"

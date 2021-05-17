@@ -128,16 +128,17 @@
   
 
           if (this.reservation != undefined) {
-              if (this.reservation.reservation_id == undefined) {
+              if (this.reservation.reservation_id != undefined) {
                  reservation.reservation_id = this.reservation.reservation_id
+               }
+
+              if (this.reservation.guest != undefined || this.reservation.guest != null) {
+                 reservation.guest = this.reservation.guest
+
                }
           }
 
-   
-
           if (this.oldReservation != undefined) {
-            // console.log(111)
-            // console.log(reservation)
             EventBus.$emit("data",reservation)
           } else {
             this.$router.push({
