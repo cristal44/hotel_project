@@ -125,10 +125,15 @@
 
           const reservation = new Reservation(this.selectedHotel, this.adult, this.children, this.checkin, this.checkout)
           reservation.hotel_id = this.selectedHotel.id
+  
 
-          if (this.reservation.reservation_id != undefined) {
-            reservation.reservation_id = this.reservation.reservation_id
+          if (this.reservation != undefined) {
+              if (this.reservation.reservation_id == undefined) {
+                 reservation.reservation_id = this.reservation.reservation_id
+               }
           }
+
+   
 
           if (this.oldReservation != undefined) {
             // console.log(111)

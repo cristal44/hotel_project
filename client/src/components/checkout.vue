@@ -120,10 +120,14 @@ export default{
 
             const guest = new Guest(this.form.firstname, this.form.lastname, this.form.email, this.form.phone)
 
-
-          if (this.reservation.guest.guest_id != undefined) {
-            guest.guest_id = this.reservation.guest.guest_id
+          if (this.reservation.guest != undefined) {
+            if (this.reservation.guest.guest_id != undefined) {
+                guest.guest_id = this.reservation.guest.guest_id
+             }
           }
+
+
+
 
             this.reservation.guest = guest;
             // console.log(this.reservation)
