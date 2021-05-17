@@ -19,7 +19,6 @@ export default class HotelService {
         return axios.put(this.url+ '/' + id, hotel)
     }
 
-
     deleteHotel(id) {
         return axios.delete(this.url+ '/' + id);
     }

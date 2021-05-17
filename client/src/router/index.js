@@ -11,6 +11,11 @@ import roommanagement from "@/components/roommanagement"
 import customer from "@/components/customer"
 import addroom from "@/components/addroom"
 import review from "@/components/review"
+import dashboard from "@/components/dashboard"
+import hotelmanagement from "@/components/hotelmanagement"
+import addHotel from "@/components/addHotel"
+
+
 
 
 Vue.use(VueRouter)
@@ -70,6 +75,21 @@ const routes = [
     path: '/review',
     name: 'review',
     component: review
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: dashboard
+  },
+  {
+    path: '/hotelmanagement',
+    name: 'hotelmanagement',
+    component: hotelmanagement
+  },
+  {
+    path: '/addHotel',
+    name: 'addHotel',
+    component: addHotel
   }
 ]
 

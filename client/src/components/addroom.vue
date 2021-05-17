@@ -5,12 +5,28 @@
                 <b-col md="6" offset-md="3">
                      <h4 class="text-center pb-4">ROOM</h4>
 
+
                       <b-form @submit="onSubmit">
+                            <b-form-group label="Room ID">
+                                <b-form-input
+                                v-model="form.id"
+                                disabled
+                                ></b-form-input>
+                            </b-form-group>
+
+                            <b-form-group label="Hotel Location">
+                                <b-form-select
+                                v-model="selectedHotel"
+                                :options="locations"
+                                class="mb-3"
+    
+                                required
+                                ></b-form-select>
+                            </b-form-group>
                  
                             <b-form-group label="Room Number">
                                 <b-form-input
                                 v-model="form.room_number"
-                                :disabled = "isDisabled"
                                 ></b-form-input>
                             </b-form-group>
 
@@ -62,6 +78,7 @@
 
 
 <script>
+import HotelService from "../service/HotelService"
 import RoomService from '../service/RoomService'
 import Room from '../model/room'
   export default {
@@ -70,8 +87,11 @@ import Room from '../model/room'
       return {
         isUpdate: false,
         submit: 'SUBMIT',
-        isDisabled: false,
+        // isDisabled: false,
+        locations:[],
+        selectedHotel: null,
         form: {
+          id:'',
           room_number: '',
           room_type: '',
           room_price: '',
@@ -88,29 +108,54 @@ import Room from '../model/room'
 
         this.room = this.$route.params.data;
         if (this.room != undefined) {
+            this.selectedHotel = this.room.hotel
+            this.form.id = this.room.id
             this.form.room_number = this.room.room_number
             this.form.room_type = this.room.room_type
             this.form.room_price = this.room.room_price
             this.form.room_status = this.room.room_status
             this.isUpdate = true
             this.submit = 'UPDATE'
-            this.isDisabled = true
+            // this.isDisabled = true
         }
     },
+
+    mounted() {
+      new HotelService().getAllHotels().then(data => {
+          const hotels = data.data
+
+          const locations = []
+          for(let i = 0; i < hotels.length; i++) {
+            locations[i] = {value: hotels[i], text: hotels[i].hotelAddress.city}
+          }
+
+          this.locations = locations
+          // console.log(this.locations)
+      })
+    },
+
 
     methods: {
         onSubmit(event){
             event.preventDefault()
             // alert(JSON.stringify(this.form))
+    console.log(111)
+            console.log(this.selectedHotel)
 
             const room = new Room(this.form.room_number, parseFloat(this.form.room_price), this.form.room_type, "this is a "  + this.form.room_type, this.form.room_status)
-
+            room.hotel = this.selectedHotel
+    
+    console.log(4444)
+ console.log(room)
             if (this.isUpdate) {
-                new RoomService().updateRoom(room, this.form.room_number);
+                new RoomService().updateRoom(room, this.form.id);
             } else {
                 new RoomService().saveRoom(room);
             }
 
+         
+
+               
 
             this.$router.push("roommanagement");
         }

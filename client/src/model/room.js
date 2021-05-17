@@ -4,7 +4,7 @@ export default class Room {
     room_type
     room_description
     room_status
-    
+    hotel
 
     constructor(room_number, room_price, room_type, room_description, room_status) {
         this. room_number =  room_number

@@ -35,7 +35,7 @@
       return {
         renderComponent: true,
         input_text: '',
-        fields: ['room_number', 'room_type', 'room_status', 'room_price', 'Action'],
+        fields: ['id', 'hotel.name','room_number', 'room_type', 'room_status', 'room_price', 'Action'],
         rooms: null,
         displayRooms: null,
         selectedRoom: null
@@ -79,11 +79,16 @@
         });    
       },
       deleteRoom(item) {
-        let id = item.room_number
-        new RoomService().deleteRoom(item.room_number)
-        let updateData = this.displayRooms.filter(room => room.room_number != id)
-        this.displayRooms = updateData
+        let id = item.id
+        new RoomService().deleteRoom(id).then(data => {
+           console.log(data)
+           let updateData = this.displayRooms.filter(room => room.id != id)
+            this.displayRooms = updateData
+        })
+
       },
+
+
    }
   }
 </script>
