@@ -74,6 +74,7 @@
 
 <script>
 import order from '@/components/order';
+import ReservationService from '../service/ReservationService'
 
 export default{
   components: {
@@ -91,8 +92,12 @@ export default{
       },
       
       cancelOrder(){
-          console.log("yes");
-          this.$router.push("/");
+ 
+          new ReservationService().deleteReservation(this.reservation.reservation_id).then(
+              this.$router.push("/")
+          )
+
+          
       }
   }
 }
