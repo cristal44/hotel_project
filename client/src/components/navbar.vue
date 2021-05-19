@@ -23,7 +23,7 @@
                   <b-dropdown-item href="#" :to="{ name: 'roommanagement' }">Rooms</b-dropdown-item>
                   <b-dropdown-item href="#">Hotel Services</b-dropdown-item>
                   <b-dropdown-item href="#">Room Services</b-dropdown-item>
-                  <b-dropdown-item href="#">Emplyees</b-dropdown-item>
+                  <b-dropdown-item href="#" :to="{ name: 'employeemanagement' }">Emplyees</b-dropdown-item>
           </b-nav-item-dropdown>
 
            <b-nav-item class="signin" href="#" @click="login">

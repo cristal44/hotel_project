@@ -75,13 +75,8 @@ import HotelService from '../service/HotelService'
   
 
   mounted() {
-    //   this.hotel = this.reservation.hotel
-    //   console.log(this.reservation)
-    //      console.log(this.reservation.hotel)
-
        new RoomService().getRoomById(this.reservation.room_id).then(data => {
         this.room = data.data
-        // console.log(this.room)
         })
 
         new HotelService().getHotelById(this.reservation.hotel_id).then(data => {

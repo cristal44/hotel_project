@@ -14,6 +14,9 @@ import review from "@/components/review"
 import dashboard from "@/components/dashboard"
 import hotelmanagement from "@/components/hotelmanagement"
 import addHotel from "@/components/addHotel"
+import employeemanagement from "@/components/employeemanagement"
+import addemployee from "@/components/addemployee"
+import employee from "@/components/employee"
 
 
 
@@ -90,6 +93,21 @@ const routes = [
     path: '/addHotel',
     name: 'addHotel',
     component: addHotel
+  },
+  {
+    path: '/employeemanagement',
+    name: 'employeemanagement',
+    component: employeemanagement
+  },
+  {
+    path: '/addemployee',
+    name: 'addemployee',
+    component: addemployee
+  },
+  {
+    path: '/employee',
+    name: 'employee',
+    component: employee
   }
 ]
 

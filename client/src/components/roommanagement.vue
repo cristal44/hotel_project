@@ -61,8 +61,10 @@
         if (this.input_text != "") {
           let data = this.rooms.filter(room => room.room_number == parseInt(this.input_text)
               || room.room_status.toUpperCase() == this.input_text.toUpperCase()
-              || room.room_type.toUpperCase() == this.input_text.toUpperCase()
-              || room.room_price == parseFloat(this.input_text.toUpperCase()))
+              || room.room_type.toUpperCase().includes(this.input_text.toUpperCase())
+              || room.room_price == parseFloat(this.input_text.toUpperCase())
+              || room.id == parseInt(this.input_text)
+              || room.hotel.name.toUpperCase().includes(this.input_text.toUpperCase()))
  
           this.displayRooms = data
         } 
