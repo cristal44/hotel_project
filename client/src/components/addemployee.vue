@@ -86,14 +86,13 @@
                                 <b-form-input v-model="form.zipcode" required></b-form-input>
                             </b-form-group>
                             
-
                         </div>
                         
                     </b-col>
                 </b-row>
 
                 <div class="mt-4 text-center">
-                     <b-button variant="primary" class="sub-button">Submit</b-button>
+                     <b-button variant="primary" type="submit"  class="sub-button">{{submit}}</b-button>
                 </div>
 
             </b-form>
@@ -105,10 +104,13 @@
 
 
 <script>
-import HotelService from "../service/HotelService"
-import RoomService from '../service/RoomService'
-import Room from '../model/room'
 import json from '../assets/state.json'
+import EmployeeService from '../service/EmployeeService'
+import Account from '../model/account'
+import Contact from '../model/contact'
+import Address from '../model/address'
+import Department from '../model/department'
+import Employee from '../model/employee'
 
   export default {
 
@@ -118,6 +120,7 @@ import json from '../assets/state.json'
         departmentOptions: ['Maintenance', 'HouseKeeping', 'Food and Beverage', 'Front Desk', 'Guest Service'],
         states: json.states,
         isUpdate: false,
+        submit: 'Submit',
 
         form: {
           id:'',
@@ -165,51 +168,35 @@ import json from '../assets/state.json'
             this.form.state = this.employee.contact.address.state,
             this.form.zipcode = this.employee.contact.address.zipCode
     
-
-
             this.submit = 'UPDATE'
-            // this.isDisabled = true
+            this.isUpdate = true
+
         }
-    },
-
-    mounted() {
-      new HotelService().getAllHotels().then(data => {
-          const hotels = data.data
-
-          const locations = []
-          for(let i = 0; i < hotels.length; i++) {
-            locations[i] = {value: hotels[i], text: hotels[i].hotelAddress.city}
-          }
-
-          this.locations = locations
-          // console.log(this.locations)
-      })
     },
 
 
     methods: {
         onSubmit(event){
             event.preventDefault()
-            // alert(JSON.stringify(this.form))
-    console.log(111)
-            console.log(this.selectedHotel)
+            alert(JSON.stringify(this.form))
+            const name = this.form.firstname + ' ' + this.form.lastname
+            const address = new Address(this.form.state, this.form.city, this.form.address, this.form.zipcode)
+            const contact = new Contact(name, address, this.form.birth, this.form.gender, this.form.email, this.form.phone)
 
-            const room = new Room(this.form.room_number, parseFloat(this.form.room_price), this.form.room_type, "this is a "  + this.form.room_type, this.form.room_status)
-            room.hotel = this.selectedHotel
-    
-    console.log(4444)
- console.log(room)
+            const department = new Department(this.form.department)
+            const account = new Account(this.form.account, name)
+
+            const employee = new Employee(name, this.form.salary, this.form.position, contact, department, account)
+
             if (this.isUpdate) {
-                new RoomService().updateRoom(room, this.form.id);
+                console.log(employee)
+                console.log(this.employee.employee_id)
+                new EmployeeService().updateEmployee(employee, this.employee.employee_id)
+                .then(this.$router.push("employeemanagement"))
             } else {
-                new RoomService().saveRoom(room);
+                new EmployeeService().saveEmployee(employee).then(
+                    this.$router.push("employeemanagement"))
             }
-
-         
-
-               
-
-            this.$router.push("roommanagement");
         }
     }
   }
