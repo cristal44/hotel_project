@@ -110,14 +110,17 @@ import Hotel from '../model/hotel'
             const address = new Address(this.form.state, this.form.city, this.form.street, this.form.zipcode)
             const hotel = new Hotel(this.form.hotel_name, address)
 
+            const _this = this
+
             if (this.isUpdate) {
-                new HotelService().updateHotel(hotel, this.hotel.id)
+                new HotelService().updateHotel(hotel, this.hotel.id).then(
+                      _this.$router.push("hotelmanagement")
+                 )
             } else {
-                new HotelService().saveHotel(hotel)
+                new HotelService().saveHotel(hotel).then(
+                      _this.$router.push("hotelmanagement")
+                 )
             }
-
-
-            this.$router.push("hotelmanagement");
         }
     }
   }

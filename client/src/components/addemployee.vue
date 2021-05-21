@@ -10,12 +10,8 @@
                                 <b-form-input v-model="form.id" disabled></b-form-input>
                             </b-form-group>
 
-                            <b-form-group label="First Name">
-                                <b-form-input v-model="form.firstname" required></b-form-input>
-                            </b-form-group>
-
-                            <b-form-group label="Last Name">
-                                <b-form-input v-model="form.lastname" required></b-form-input>
+                            <b-form-group label="Name">
+                                <b-form-input v-model="form.name" required></b-form-input>
                             </b-form-group>
 
                             <b-form-group label="Birth">
@@ -68,24 +64,26 @@
                             </b-form-group>
 
                             <b-row>
-                                <b-col md="6">
+                                <b-col md="4">
                                     <b-form-group label="City">
                                         <b-form-input v-model="form.city" required placeholder=""></b-form-input>
                                     </b-form-group>
                                 </b-col>
 
-                                <b-col md="6">
+                                <b-col md="4">
                                     <b-form-group label="State">
                                         <b-form-select v-model="form.state" :options="states" required
                                         ></b-form-select>
                                    </b-form-group>
                                 </b-col>
-                            </b-row>
 
-                            <b-form-group label="Zipcode">
-                                <b-form-input v-model="form.zipcode" required></b-form-input>
-                            </b-form-group>
-                            
+                                <b-col md="4">
+                                  <b-form-group label="Zipcode">
+                                     <b-form-input v-model="form.zipcode" required></b-form-input>
+                                  </b-form-group>
+                                </b-col>
+                            </b-row>
+     
                         </div>
                         
                     </b-col>
@@ -124,8 +122,7 @@ import Employee from '../model/employee'
 
         form: {
           id:'',
-          firstname:'',
-          lastname:'',
+          name:'',
           birth:'',
           gender:'',
           email:'',
@@ -150,11 +147,8 @@ import Employee from '../model/employee'
 
         this.employee = this.$route.params.data;
         if (this.employee != undefined) {
-            const name = this.employee.name.split(" ");
             this.form.id = this.employee.employee_id,
-           
-            this.form.firstname = name[0],
-            this.form.lastname = name[1],
+            this.form.name = this.employee.name
             this.form.birth = this.employee.contact.birth,
             this.form.gender = this.employee.contact.gender,
             this.form.email = this.employee.contact.email,
@@ -178,15 +172,13 @@ import Employee from '../model/employee'
     methods: {
         onSubmit(event){
             event.preventDefault()
-            alert(JSON.stringify(this.form))
-            const name = this.form.firstname + ' ' + this.form.lastname
             const address = new Address(this.form.state, this.form.city, this.form.address, this.form.zipcode)
-            const contact = new Contact(name, address, this.form.birth, this.form.gender, this.form.email, this.form.phone)
+            const contact = new Contact(this.form.name, address, this.form.birth, this.form.gender, this.form.email, this.form.phone)
 
             const department = new Department(this.form.department)
-            const account = new Account(this.form.account, name)
+            const account = new Account(this.form.account, this.form.name)
 
-            const employee = new Employee(name, this.form.salary, this.form.position, contact, department, account)
+            const employee = new Employee(this.form.name, this.form.salary, this.form.position, contact, department, account)
 
             if (this.isUpdate) {
                 console.log(employee)

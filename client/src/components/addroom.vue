@@ -139,25 +139,28 @@ import Room from '../model/room'
         onSubmit(event){
             event.preventDefault()
             // alert(JSON.stringify(this.form))
-    console.log(111)
-            console.log(this.selectedHotel)
 
             const room = new Room(this.form.room_number, parseFloat(this.form.room_price), this.form.room_type, "this is a "  + this.form.room_type, this.form.room_status)
             room.hotel = this.selectedHotel
+
+            const _this = this
     
-    console.log(4444)
- console.log(room)
+
             if (this.isUpdate) {
-                new RoomService().updateRoom(room, this.form.id);
+                new RoomService().updateRoom(room, this.form.id).then(
+                    _this.$router.push("roommanagement")
+                )
             } else {
-                new RoomService().saveRoom(room);
+                new RoomService().saveRoom(room).then(
+                    _this.$router.push("roommanagement")
+                )
             }
 
          
 
                
 
-            this.$router.push("roommanagement");
+            
         }
     }
   }

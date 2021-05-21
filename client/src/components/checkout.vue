@@ -131,6 +131,8 @@ export default{
 
             
           if (this.reservation.reservation_id == undefined) {
+              console.log("checkout")
+              console.log(this.reservation)
             new ReservationService().saveReservation(this.reservation).then(
                 data => {
                     const rev = data.data

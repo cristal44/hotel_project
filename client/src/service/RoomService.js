@@ -5,6 +5,8 @@ export default class RoomService {
 
     getAvailableRoomsByHotel(id){
         return axios.get(this.url+ '/hotel/' + id + '/available');
+
+        // hotel/{id}/available
     }
 
     getAllRooms() {
