@@ -17,6 +17,9 @@ import addHotel from "@/components/addHotel"
 import employeemanagement from "@/components/employeemanagement"
 import addemployee from "@/components/addemployee"
 import employee from "@/components/employee"
+import roomservice from "@/components/roomservice"
+import roomservicemanagement from "@/components/roomservicemanagement"
+
 
 
 
@@ -108,6 +111,16 @@ const routes = [
     path: '/employee',
     name: 'employee',
     component: employee
+  },
+  {
+    path: '/roomservice',
+    name: 'roomservice',
+    component: roomservice
+  },
+  {
+    path: '/roomservicemanagement',
+    name: 'roomservicemanagement',
+    component: roomservicemanagement
   }
 ]
 

@@ -9,12 +9,10 @@
 
       <b-navbar-nav class="menu">
         <b-nav-item href="#" class="mr-4" :to="{ name: 'findreservation' }">MODIFY A RESERVATION</b-nav-item>
-        <b-nav-item href="#" class="mr-4" :to="{ name: 'review' }">REVIEW</b-nav-item>
         <b-nav-item href="#" class="mr-4" :to="{ name: 'review' }">HOTEL SERVICES</b-nav-item>
-        <b-nav-item-dropdown text="ROOM SERVICES" class="pl-3">
-            <b-dropdown-item href="#" :to="{ name: 'hotelmanagement' }">FOOD</b-dropdown-item>
-            <b-dropdown-item href="#" :to="{ name: 'roommanagement' }">DRINKS</b-dropdown-item>
-        </b-nav-item-dropdown>
+        <b-nav-item href="#" class="mr-4" :to="{ name: 'roomservice'}">ROOM SERVICES</b-nav-item>
+        <b-nav-item href="#" class="mr-4" :to="{ name: 'review' }">CUSTOMER REVIEW</b-nav-item>
+        <b-nav-item href="#" class="mr-4" :to="{ name: 'review' }">CUSTOMER COMPLAINT</b-nav-item>
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto menu">
@@ -22,9 +20,10 @@
                   <b-dropdown-item href="#" :to="{ name: 'hotelmanagement' }">Hotels</b-dropdown-item>
                   <b-dropdown-item href="#" :to="{ name: 'roommanagement' }">Rooms</b-dropdown-item>
                   <b-dropdown-item href="#">Hotel Services</b-dropdown-item>
-                  <b-dropdown-item href="#">Room Services</b-dropdown-item>
+                  <b-dropdown-item href="#" :to="{ name: 'roomservicemanagement' }" >Room Services</b-dropdown-item>
                   <b-dropdown-item href="#" :to="{ name: 'employeemanagement' }">Emplyees</b-dropdown-item>
           </b-nav-item-dropdown>
+          
 
            <b-nav-item class="signin" href="#" @click="login">
           {{status}}
@@ -86,7 +85,7 @@
     data() {
     
       return {
-        isShown: true,
+        isShown: false,
         status: "ADMIN LOGIN",
         isMatched: false,
 
