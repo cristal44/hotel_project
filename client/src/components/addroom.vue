@@ -81,7 +81,9 @@
 import HotelService from "../service/HotelService"
 import RoomService from '../service/RoomService'
 import Room from '../model/room'
-  export default {
+import EventBus from '../event-bus'
+
+export default {
 
     data() {
       return {
@@ -144,22 +146,18 @@ import Room from '../model/room'
             room.hotel = this.selectedHotel
 
             const _this = this
-    
 
             if (this.isUpdate) {
-                new RoomService().updateRoom(room, this.form.id).then(
+                new RoomService().updateRoom(room, this.form.id).then(data => {
+                    EventBus.$emit("updated_room",data.data)
                     _this.$router.push("roommanagement")
-                )
+                })
             } else {
-                new RoomService().saveRoom(room).then(
+                new RoomService().saveRoom(room).then(data => {
+                    EventBus.$emit("added_room",data.data)
                     _this.$router.push("roommanagement")
-                )
+                })
             }
-
-         
-
-               
-
             
         }
     }

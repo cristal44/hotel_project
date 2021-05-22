@@ -19,7 +19,8 @@
 
            <b-table id = "my-table" Borderless :items="displayEmployeeInfo" :fields="fields" :tbody-tr-class="rowClass">
               <template v-slot:cell(action)="{ item }"> 
-                    <b-button variant="link" class="mr-2" size="sm" v-on:click="checkEmployeeDetails(item)">Check Details</b-button>
+                    <b-button variant="link" class="mr-2" size="sm" v-on:click="checkEmployeeDetails(item)">Details</b-button>
+                    <b-button variant="link" size="sm" v-on:click="deleteEmployee(item)">Delete</b-button>
               </template>
            </b-table>
         </b-container>
@@ -29,6 +30,7 @@
 <script>
 import EmployeeService from '../service/EmployeeService'
 import DisplayEmployeeInfo from '../model/displayEmployeeInfo'
+import EventBus from '../event-bus'
 
   export default {
     data() {
@@ -44,25 +46,48 @@ import DisplayEmployeeInfo from '../model/displayEmployeeInfo'
     },
 
     created() {
-        new EmployeeService().getAllEmployees().then(data => {
-            console.log(data.data)
-            this.employees = data.data
-            for (let i = 0; i < this.employees.length; i++) {
-                const emplyee = new DisplayEmployeeInfo(this.employees[i].employee_id,
-                                                        this.employees[i].name,
-                                                        this.employees[i].department.departmentName, 
-                                                        this.employees[i].position,
-                                                        this.employees[i].contact.email, 
-                                                        this.employees[i].contact.phone)
-                this.employeeInfo[i] = emplyee
-             }
-             this.displayEmployeeInfo = this.employeeInfo
+      EventBus.$on("added_employee", (data)=>{
+          if (this.displayEmployeeInfo != null) {
+            this.displayEmployeeInfo[this.displayEmployeeInfo.length] = this.convertToEmployeeInfo(data)
+          } 
+      }) 
 
-        })
+      EventBus.$on("updated_employee", (data)=>{   
+          if (this.displayEmployeeInfo != null) {
+            const index = this.displayEmployeeInfo.findIndex(x => x.id == data.employee_id);
+            this.displayEmployeeInfo[index] = this.convertToEmployeeInfo(data);    
+          } 
+      }) 
+
+
+      this.getAllEmployeesFromAPI()
+        
     },
 
 
     methods: {
+      getAllEmployeesFromAPI() {
+        new EmployeeService().getAllEmployees().then(data => {
+            this.employees = data.data
+            for (let i = 0; i < this.employees.length; i++) {
+                const employee = this.convertToEmployeeInfo(this.employees[i])
+                this.employeeInfo[i] = employee
+             }
+             this.displayEmployeeInfo = this.employeeInfo
+
+        })
+      },
+
+      convertToEmployeeInfo(emplyee) {
+        return new DisplayEmployeeInfo(emplyee.employee_id,
+                                                    emplyee.name,
+                                                    emplyee.department.departmentName, 
+                                                    emplyee.position,
+                                                    emplyee.contact.email, 
+                                                    emplyee.contact.phone)
+      },
+
+
       rowClass(item, type) {
         if (!item || type !== 'row') return
       },
@@ -94,6 +119,15 @@ import DisplayEmployeeInfo from '../model/displayEmployeeInfo'
               }
           })
           
+      },
+
+      deleteEmployee(item) {
+        let id = item.id
+        new EmployeeService().deleteEmployee(id).then(data => {
+            console.log(data)
+            let updateData = this.displayEmployeeInfo.filter(e => e.id != id)
+            this.displayEmployeeInfo = updateData
+         })
       },
    }
   }

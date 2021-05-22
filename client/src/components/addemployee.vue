@@ -109,6 +109,7 @@ import Contact from '../model/contact'
 import Address from '../model/address'
 import Department from '../model/department'
 import Employee from '../model/employee'
+import EventBus from '../event-bus'
 
   export default {
 
@@ -180,14 +181,20 @@ import Employee from '../model/employee'
 
             const employee = new Employee(this.form.name, this.form.salary, this.form.position, contact, department, account)
 
+            const _this = this
+
             if (this.isUpdate) {
-                console.log(employee)
-                console.log(this.employee.employee_id)
-                new EmployeeService().updateEmployee(employee, this.employee.employee_id)
-                .then(this.$router.push("employeemanagement"))
+                new EmployeeService().updateEmployee(employee, this.employee.employee_id).then(data => {
+                    EventBus.$emit("updated_employee",data.data),
+                    _this.$router.push("employeemanagement")
+
+                })
+
             } else {
-                new EmployeeService().saveEmployee(employee).then(
-                    this.$router.push("employeemanagement"))
+                new EmployeeService().saveEmployee(employee).then(data => {
+                     EventBus.$emit("added_employee",data.data),
+                    _this.$router.push("employeemanagement")
+                })
             }
         }
     }

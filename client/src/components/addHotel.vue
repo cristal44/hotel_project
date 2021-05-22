@@ -66,6 +66,7 @@
 import HotelService from '../service/HotelService'
 import Address from '../model/address'
 import Hotel from '../model/hotel'
+ import EventBus from '../event-bus'
   export default {
 
     data() {
@@ -113,13 +114,15 @@ import Hotel from '../model/hotel'
             const _this = this
 
             if (this.isUpdate) {
-                new HotelService().updateHotel(hotel, this.hotel.id).then(
-                      _this.$router.push("hotelmanagement")
-                 )
+                new HotelService().updateHotel(hotel, this.hotel.id).then(data => {
+                    EventBus.$emit("updated_reservation",data.data),
+                    _this.$router.push("hotelmanagement")
+                })
             } else {
-                new HotelService().saveHotel(hotel).then(
-                      _this.$router.push("hotelmanagement")
-                 )
+                new HotelService().saveHotel(hotel).then(data => {
+                     EventBus.$emit("added_reservation",data.data),
+                    _this.$router.push("hotelmanagement")
+                })                 
             }
         }
     }

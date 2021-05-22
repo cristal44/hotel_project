@@ -29,6 +29,7 @@
 
 <script>
   import RoomService from '../service/RoomService'
+  import EventBus from '../event-bus'
 
   export default {
     data() {
@@ -43,21 +44,38 @@
     },
 
     created() {
-      new RoomService().getAllRooms().then(data => {
-        this.rooms = data.data
-        this.displayRooms = this.rooms
-        console.log(data)
-        })
+
+      this.getRoomsFromAPI()
+
+      EventBus.$on("added_room", (data)=>{
+          if (this.displayRooms != null && !this.displayRooms.includes(data)) {
+            this.displayRooms[this.displayRooms.length] = data
+          } 
+      }) 
+
+      EventBus.$on("updated_room", (data)=>{   
+          if (this.displayRooms != null) {
+            var index = this.displayRooms .findIndex(x => x.id == data.id);
+            this.displayRooms[index] = data;           
+          } 
+      }) 
+
     },
 
     methods: {
+      getRoomsFromAPI() {
+        new RoomService().getAllRooms().then(data => {
+          this.rooms = data.data
+          this.displayRooms = this.rooms
+          })
+      },
+
       rowClass(item, type) {
         if (!item || type !== 'row') return
         if (item.room_status === 'Occupied') return 'table-success'
       },
 
       filterRooms(){
-        console.log(this.selectedRoom)
         if (this.input_text != "") {
           let data = this.rooms.filter(room => room.room_number == parseInt(this.input_text)
               || room.room_status.toUpperCase() == this.input_text.toUpperCase()
@@ -80,6 +98,7 @@
             params: { data: item}
         });    
       },
+      
       deleteRoom(item) {
         let id = item.id
         new RoomService().deleteRoom(id).then(data => {
