@@ -25,9 +25,6 @@
                 ></b-form-input>
             </b-form-group>
 
-
-
-
             <div class="pt-3">
                  <b-row>
                     <b-col align-self="start"></b-col>
@@ -35,19 +32,17 @@
                         <b-button class="button" block type="submit" size="lg" variant="primary">FIND RESERVATION</b-button>
                     </b-col>
                     <b-col align-self="end">  </b-col>
-                </b-row>
-              
+                </b-row>             
             </div>
 
-<!-- 
-            <div class="pt-4 mt-3 text-center error">
-                {{error}}
-            </div> -->
-
-
-
          </b-form>
+
+      
+         <h5 class="pt-4 mt-3 text-center error" v-if="showError">Sorry, the reservation number or email address is wrong, please try again!</h5>
+
+
     </b-container>
+
 </div>
 
 
@@ -60,11 +55,12 @@ import ReservationService from '../service/ReservationService'
   export default {
     data() {
       return {
+        showError: false,
         form: {
           number: '',
           email: '',
-          // error: '',
-          reservation: null
+          reservation: null,
+
         },
       }
     },
@@ -85,8 +81,10 @@ import ReservationService from '../service/ReservationService'
                });    
             }
           }
-
       })
+
+
+      this.showError = true
     }
   }
   }
@@ -108,5 +106,6 @@ h4{
 
 .error{
   color: red;
+  font-size: 20px;
 }
 </style>

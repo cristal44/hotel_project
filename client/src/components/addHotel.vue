@@ -36,12 +36,10 @@
                             </b-form-group>
 
                             <b-form-group label="State">
-                                <b-form-input
-                                v-model="form.state"
-                                required
-                                ></b-form-input>
+                                <b-form-select  v-model="form.state" :options="states" required></b-form-select>
                             </b-form-group>
 
+            
                             <b-form-group label="Zipcode">
                                 <b-form-input
                                 v-model="form.zipcode"
@@ -63,6 +61,7 @@
 
 
 <script>
+import json from '../assets/state.json'
 import HotelService from '../service/HotelService'
 import Address from '../model/address'
 import Hotel from '../model/hotel'
@@ -73,6 +72,7 @@ import Hotel from '../model/hotel'
       return {
         isUpdate: false,
         submit: 'SUBMIT',
+        states: json.states,
         form: {
           id: '',
           hotel_name: '',

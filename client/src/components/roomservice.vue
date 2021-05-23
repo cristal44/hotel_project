@@ -8,24 +8,23 @@
                         <div  class="mt-4">
                             <h5 >FOOD:</h5>
                             <hr>
-                            <b-container fluid class="list" v-for="food in foods" :key="food.id">
+                            <b-container fluid class="list pb-3" v-for="food in foods" :key="food.id">
                                 <b-row>
                                     <b-col md="6">{{food.name}}</b-col>
-                                    <b-col md="6" class="text-right">{{food.price}}</b-col>
+                                    <b-col md="6" class="text-right">$ {{food.price}}</b-col>
                                 </b-row>
                             </b-container>
 
                         </div>
 
 
-
                         <div class="mt-4 pt-4">
                             <h5>BEVERAGES:</h5>
                             <hr>
-                            <b-container fluid class="list" v-for="drink in drinks" :key="drink.id">
+                            <b-container fluid class="list pb-3" v-for="drink in drinks" :key="drink.id">
                                 <b-row>
-                                    <b-col md="6">{{drink.name}}</b-col>
-                                    <b-col md="6" class="text-right">{{drink.price}}</b-col>
+                                    <b-col md="6">$ {{drink.name}}</b-col>
+                                    <b-col md="6" class="text-right">$ {{drink.price}}</b-col>
                                 </b-row>
                             </b-container>
                         </div>

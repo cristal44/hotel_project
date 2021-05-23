@@ -6,14 +6,14 @@
                  <b-row>
 
                     <b-col>
-                        <b-form-group label="ID">
-                                <b-form-input v-model="id" disabled></b-form-input>
+                        <b-form-group label="Type">
+                            <b-form-select v-model="selectedType" :options="types" class="mb-3" :disabled="disabled" required></b-form-select>
                         </b-form-group>
                     </b-col>
 
                     <b-col>
-                        <b-form-group label="Type">
-                            <b-form-select v-model="selectedType" :options="types" class="mb-3" required></b-form-select>
+                        <b-form-group label="ID">
+                                <b-form-input v-model="id" :disabled="disabled"></b-form-input>
                         </b-form-group>
                     </b-col>
 
@@ -91,6 +91,7 @@ import Drink from '../model/Drink'
         fields: ['id', 'name', 'price', 'action'],
         types: ['Food', 'Drink'],
 
+        disabled: false,
         id:'',
         selectedType: '',
         name: '',
@@ -130,18 +131,18 @@ import Drink from '../model/Drink'
        onSubmit(){
            if (this.isUpdate) {
                if (this.selectedType == 'Food') {
-                    const food = new Food(this.name, this.selectedType, this.price)
+                    const food = new Food(this.id, this.name, this.selectedType, this.price)
                     new FoodService().updateFood(food, this.selectedItem.id)
                 } else {
-                    const drink = new Drink(this.name, this.selectedType, this.price)
+                    const drink = new Drink(this.id, this.name, this.selectedType, this.price)
                     new DrinkService().updateDrink(drink,this.selectedItem.id)
                 }
            } else {
                 if (this.selectedType == 'Food') {
-                    const food = new Food(this.name, this.selectedType, this.price)
+                    const food = new Food(this.id, this.name, this.selectedType, this.price)
                     new FoodService().saveFood(food)
                 } else {
-                    const drink = new Drink(this.name, this.selectedType, this.price)
+                    const drink = new Drink(this.id,this.name, this.selectedType, this.price)
                     new DrinkService().saveDrink(drink)
                 }
            }
@@ -150,6 +151,7 @@ import Drink from '../model/Drink'
 
        updateItem(item) {
            this.isUpdate = true
+           this.disabled = true
            this.selectedItem = item
            this.submit = "Update"
            this.id = item.id
