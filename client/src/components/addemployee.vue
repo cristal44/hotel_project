@@ -145,6 +145,9 @@ import EventBus from '../event-bus'
 
 
     created() {
+        EventBus.$emit("admin_status",'LOGOUT')
+        EventBus.$emit("admin_show",true)
+
 
         this.employee = this.$route.params.data;
         if (this.employee != undefined) {

@@ -1,6 +1,7 @@
 <template>
     <div v-if="renderComponent">
         <b-container class="pt-4">
+             <h2 class="text-center mt-4 pb-4 mb-4">Room Management</h2>
           <b-row>
               <b-col>
                 <b-nav-form class="mb-4">
@@ -44,6 +45,8 @@
     },
 
     created() {
+      EventBus.$emit("admin_status",'LOGOUT')
+      EventBus.$emit("admin_show",true)
 
       this.getRoomsFromAPI()
 
@@ -116,6 +119,9 @@
 
 
 <style scoped>
+  h2 {
+    color: #b38600;
+  }
   .cbutton {
     background-color: #b38600;
   }

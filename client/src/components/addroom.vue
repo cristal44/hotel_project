@@ -107,6 +107,8 @@ export default {
 
 
     created() {
+        EventBus.$emit("admin_status",'LOGOUT')
+        EventBus.$emit("admin_show",true)
 
         this.room = this.$route.params.data;
         if (this.room != undefined) {

@@ -86,6 +86,8 @@ import Hotel from '../model/hotel'
 
 
     created() {
+        EventBus.$emit("admin_status",'LOGOUT')
+        EventBus.$emit("admin_show",true)
 
         this.hotel = this.$route.params.data;
         console.log(this.hotel)

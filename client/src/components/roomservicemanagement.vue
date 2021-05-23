@@ -1,6 +1,8 @@
 <template>
     <div v-if="renderComponent">
         <b-container class="pt-4">
+            <h2 class="text-center mt-4 mb-4 pb-4">Room Service Management</h2>
+
             <div class="bg pt-4 pl-4 pr-4 pb-2 rounded">
               <b-form @submit="onSubmit">
                  <b-row>
@@ -82,6 +84,7 @@ import FoodService from '../service/FoodService'
 import DrinkService from '../service/DrinkService'
 import Food from '../model/Food'
 import Drink from '../model/Drink'
+import EventBus from '../event-bus'
 
   export default {
     data() {
@@ -107,6 +110,9 @@ import Drink from '../model/Drink'
     },
 
     created() {
+        EventBus.$emit("admin_status",'LOGOUT')
+        EventBus.$emit("admin_show",true)
+
         this.getAllFoods()
         this.getAllDrinks() 
      },
@@ -178,7 +184,7 @@ import Drink from '../model/Drink'
     background-color: #ebf0fa;
   }
 
-  h3 {
+  h2, h3 {
       color: #b38600;
   }
 </style>

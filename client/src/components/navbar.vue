@@ -81,6 +81,7 @@
 </template>
 
 <script>
+import EventBus from '../event-bus'
   export default {
     data() {
     
@@ -99,6 +100,21 @@
 
       }
     },
+
+    created() {
+      EventBus.$on("admin_status", (data)=>{
+        //  this.status = "ADMIN LOGIN"
+        this.status = data
+      }) 
+
+      EventBus.$on("admin_show", (data)=>{   
+         this.isShown = data
+        // this.status = 'LOGOUT'
+
+      }) 
+    },
+
+
     methods: {
 
       login() {

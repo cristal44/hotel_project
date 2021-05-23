@@ -1,6 +1,9 @@
 <template>
     <div v-if="renderComponent">
+
         <b-container class="pt-4">
+
+          <h2 class="text-center mt-4 pb-4">Hotel Management</h2>
           <b-row>
               <b-col></b-col>
 
@@ -23,7 +26,7 @@
 <script>
   import HotelService from '../service/HotelService'
   import displayedHotel from '../model/displayedHotel'
-   import EventBus from '../event-bus'
+  import EventBus from '../event-bus'
 
   export default {
     data() {
@@ -41,6 +44,9 @@
 
 
     created() {
+        EventBus.$emit("admin_status",'LOGOUT')
+        EventBus.$emit("admin_show",true)
+
         EventBus.$on("added_reservation", (data)=>{
           if (this.displayHotels != null && !this.displayHotels.includes(data)) {
               const hotel = new displayedHotel(data.name, data.hotelAddress.state, data.hotelAddress.city, data.hotelAddress.street, data.hotelAddress.zipCode)
@@ -115,6 +121,9 @@
 
 
 <style scoped>
+  h2{
+    color: #b38600;
+  }
   .cbutton {
     background-color: #b38600;
   }

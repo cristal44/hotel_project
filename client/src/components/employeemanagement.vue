@@ -1,6 +1,8 @@
 <template>
     <div v-if="renderComponent">
         <b-container class="pt-4">
+          <h2 class="text-center mt-4 mb-4 pb-4">Employee Management</h2>
+
           <b-row>
               <b-col>
                 <b-nav-form class="mb-4">
@@ -135,6 +137,9 @@ import EventBus from '../event-bus'
 
 
 <style scoped>
+  h2 {
+    color: #b38600;
+  }
   .cbutton {
     background-color: #b38600;
   }

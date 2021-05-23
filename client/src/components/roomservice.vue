@@ -23,7 +23,7 @@
                             <hr>
                             <b-container fluid class="list pb-3" v-for="drink in drinks" :key="drink.id">
                                 <b-row>
-                                    <b-col md="6">$ {{drink.name}}</b-col>
+                                    <b-col md="6">{{drink.name}}</b-col>
                                     <b-col md="6" class="text-right">$ {{drink.price}}</b-col>
                                 </b-row>
                             </b-container>
