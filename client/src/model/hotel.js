@@ -7,5 +7,5 @@ export default class Hotel {
         this.name = name;
         this.hotelAddress = hotelAddress
 
-}
+    }
 }

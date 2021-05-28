@@ -9,7 +9,7 @@
 
       <b-navbar-nav class="menu">
         <b-nav-item href="#" class="mr-4" :to="{ name: 'findreservation' }">MODIFY A RESERVATION</b-nav-item>
-        <b-nav-item href="#" class="mr-4" :to="{ name: 'review' }">HOTEL SERVICES</b-nav-item>
+        <b-nav-item href="#" class="mr-4" :to="{ name: 'hotelservice' }">HOTEL SERVICES</b-nav-item>
         <b-nav-item href="#" class="mr-4" :to="{ name: 'roomservice'}">ROOM SERVICES</b-nav-item>
         <b-nav-item href="#" class="mr-4" :to="{ name: 'review' }">CUSTOMER REVIEW</b-nav-item>
         <b-nav-item href="#" class="mr-4" :to="{ name: 'review' }">CUSTOMER COMPLAINT</b-nav-item>
@@ -19,7 +19,7 @@
           <b-nav-item-dropdown text="MANAGEMENT" class="pl-3" v-if="isShown" >
                   <b-dropdown-item href="#" :to="{ name: 'hotelmanagement' }">Hotels</b-dropdown-item>
                   <b-dropdown-item href="#" :to="{ name: 'roommanagement' }">Rooms</b-dropdown-item>
-                  <b-dropdown-item href="#">Hotel Services</b-dropdown-item>
+                  <b-dropdown-item href="#" :to="{name: 'hotelservicemanagement' }">Hotel Services</b-dropdown-item>
                   <b-dropdown-item href="#" :to="{ name: 'roomservicemanagement' }" >Room Services</b-dropdown-item>
                   <b-dropdown-item href="#" :to="{ name: 'employeemanagement' }">Emplyees</b-dropdown-item>
           </b-nav-item-dropdown>
