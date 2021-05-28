@@ -55,6 +55,8 @@ import HotelServiceService from '../service/HotelServiceService'
 
 .title{
     color: #b38600;
+    font-size: 32px;
+    font-weight: bold;
 }
 
 </style>
