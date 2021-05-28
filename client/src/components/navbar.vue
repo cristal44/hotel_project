@@ -12,16 +12,20 @@
         <b-nav-item href="#" class="mr-4" :to="{ name: 'hotelservice' }">HOTEL SERVICES</b-nav-item>
         <b-nav-item href="#" class="mr-4" :to="{ name: 'roomservice'}">ROOM SERVICES</b-nav-item>
         <b-nav-item href="#" class="mr-4" :to="{ name: 'review' }">CUSTOMER REVIEW</b-nav-item>
-        <b-nav-item href="#" class="mr-4" :to="{ name: 'review' }">CUSTOMER COMPLAINT</b-nav-item>
+        <b-nav-item href="#" class="mr-4" :to="{ name: 'complaint' }">CUSTOMER COMPLAINT</b-nav-item>
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto menu">
           <b-nav-item-dropdown text="MANAGEMENT" class="pl-3" v-if="isShown" >
                   <b-dropdown-item href="#" :to="{ name: 'hotelmanagement' }">Hotels</b-dropdown-item>
                   <b-dropdown-item href="#" :to="{ name: 'roommanagement' }">Rooms</b-dropdown-item>
+                  <b-dropdown-item href="#" :to="{ name: 'employeemanagement' }">Emplyees</b-dropdown-item>
                   <b-dropdown-item href="#" :to="{name: 'hotelservicemanagement' }">Hotel Services</b-dropdown-item>
                   <b-dropdown-item href="#" :to="{ name: 'roomservicemanagement' }" >Room Services</b-dropdown-item>
-                  <b-dropdown-item href="#" :to="{ name: 'employeemanagement' }">Emplyees</b-dropdown-item>
+                  <b-dropdown-item href="#" :to="{ name: 'complaintmanagement' }">Complaints</b-dropdown-item>
+
+
+                  
           </b-nav-item-dropdown>
           
 

@@ -21,7 +21,8 @@ import roomservice from "@/components/roomservice"
 import roomservicemanagement from "@/components/roomservicemanagement"
 import hotelservice from "@/components/hotelservice"
 import hotelservicemanagement from "@/components/hotelservicemanagement"
-
+import complaint from "@/components/complaint"
+import complaintmanagement from "@/components/complaintmanagement"
 
 
 
@@ -135,6 +136,16 @@ const routes = [
     path: '/hotelservicemanagement',
     name: 'hotelservicemanagement',
     component: hotelservicemanagement
+  },
+  {
+    path: '/complaint',
+    name: 'complaint',
+    component: complaint
+  },
+  {
+    path: '/complaintmanagement',
+    name: 'complaintmanagement',
+    component: complaintmanagement
   }
 ]
 
