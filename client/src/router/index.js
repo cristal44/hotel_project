@@ -23,11 +23,7 @@ import hotelservice from "@/components/hotelservice"
 import hotelservicemanagement from "@/components/hotelservicemanagement"
 import complaint from "@/components/complaint"
 import complaintmanagement from "@/components/complaintmanagement"
-
-
-
-
-
+import reviewmanagement from "@/components/reviewmanagement"
 
 Vue.use(VueRouter)
 
@@ -146,6 +142,11 @@ const routes = [
     path: '/complaintmanagement',
     name: 'complaintmanagement',
     component: complaintmanagement
+  },
+  {
+    path: '/reviewmanagement',
+    name: 'reviewmanagement',
+    component: reviewmanagement
   }
 ]
 

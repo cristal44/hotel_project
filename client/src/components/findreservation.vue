@@ -37,10 +37,9 @@
 
          </b-form>
 
-      
-         <h5 class="pt-4 mt-3 text-center error" v-if="showError">Sorry, the reservation number or email address is wrong, please try again!</h5>
-
-
+           <b-alert :show="showError" variant="danger" class="mt-3 text-center">
+             Sorry, the reservation number or email address is wrong, please try again!
+           </b-alert>
     </b-container>
 
 </div>
@@ -104,8 +103,4 @@ h4{
     border: #b38600;
 }
 
-.error{
-  color: red;
-  font-size: 20px;
-}
 </style>

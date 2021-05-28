@@ -4,10 +4,10 @@ export default class Review {
     rating;
     name;
 
-    constructor(name, rating, date, comment){
+    constructor(name, rating, comment){
         this.name = name;
         this.comment = comment;
-        this.date = date;
+        this.date = new Date().toLocaleString();
         this.rating = rating;
     }
 

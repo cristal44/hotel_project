@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default class ReviewService {
-    url = "http://localhost:8080/api/reviews";
+    url = "http://localhost:8080/api/v1/reviews";
 
 
     getAllReviews() {

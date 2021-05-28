@@ -23,9 +23,7 @@
                   <b-dropdown-item href="#" :to="{name: 'hotelservicemanagement' }">Hotel Services</b-dropdown-item>
                   <b-dropdown-item href="#" :to="{ name: 'roomservicemanagement' }" >Room Services</b-dropdown-item>
                   <b-dropdown-item href="#" :to="{ name: 'complaintmanagement' }">Complaints</b-dropdown-item>
-
-
-                  
+                  <b-dropdown-item href="#" :to="{ name: 'reviewmanagement' }">Reviews</b-dropdown-item>      
           </b-nav-item-dropdown>
           
 
