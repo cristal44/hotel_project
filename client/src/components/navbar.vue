@@ -63,6 +63,7 @@
               <b-form-input
                 password="password-input"
                 v-model="password"
+                type = "password"
                 :state="passwordState"
                 required
               ></b-form-input>
@@ -105,14 +106,11 @@ import EventBus from '../event-bus'
 
     created() {
       EventBus.$on("admin_status", (data)=>{
-        //  this.status = "ADMIN LOGIN"
         this.status = data
       }) 
 
       EventBus.$on("admin_show", (data)=>{   
          this.isShown = data
-        // this.status = 'LOGOUT'
-
       }) 
     },
 
@@ -155,7 +153,14 @@ import EventBus from '../event-bus'
           return
         }
 
-        if (this.id != 'admin' && this.password != '123') {
+        if (this.id == 'admin' && this.password == '123') {
+          this.isShown = true
+          this.status = 'LOGOUT'
+          this.$nextTick(() => {
+          this.$bvModal.hide('modal-login')
+        })
+
+        } else {
           this.isMatched = true
           this.idState = false
           this.passwordState = false
@@ -163,14 +168,6 @@ import EventBus from '../event-bus'
          
           return
         }
-
-        this.isShown = true
-        this.status = 'LOGOUT'
-        // this.$router.push("dashboard");
-
-        this.$nextTick(() => {
-          this.$bvModal.hide('modal-login')
-        })
       },
     }
   }
